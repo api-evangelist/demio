@@ -1,0 +1,147 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Packagist (packagist.org/search.json?q=demio), the npm registry search API, PyPI,
+  RubyGems, the meetdemio GitHub organization, and the Demio Help Center developer pages
+provider: Demio
+providerId: demio
+description: >-
+  Demio ships exactly one first-party client library for the Public Demio API: a PHP SDK
+  published to Packagist as meetdemio/demio-php-sdk from Demio's own GitHub organization
+  (github.com/meetdemio). It is real and it is official — and it has had exactly one
+  release, version 1.0 on 2016-03-22, with the repository last pushed on 2016-03-31. The
+  API it wraps has itself been static since the published API Blueprint's 2022-04-19 last
+  update, so the SDK is not behind a moving contract, but a decade without a release on
+  the only client library a provider ships is the single strongest abandonment signal
+  available here. The remaining first-party packages are internal front-end tooling
+  (a shared UI component library and a lint-rules config) published to npm by Demio and
+  Banzai engineers; they are catalogued for completeness and are explicitly NOT API
+  clients.
+sdk_count: 1
+packages:
+  - language: php
+    registry: packagist
+    name: meetdemio/demio-php-sdk
+    version: '1.0'
+    published: '2016-03-22'
+    url: https://packagist.org/packages/meetdemio/demio-php-sdk
+    install: composer require meetdemio/demio-php-sdk
+    repository: https://github.com/meetdemio/demio-php-sdk
+    license: BSD-3-Clause
+    official: true
+    api_client: true
+    kind: rest-client
+    downloads: 32101
+    note: >-
+      "This PHP SDK are built for easier working with existing Demio REST API inside PHP
+      projects." Published under Demio's own GitHub org (meetdemio, org id 18006634).
+      Requires php >= 5.5 and guzzlehttp/guzzle ~6.0 — both long out of support. One
+      release only (1.0, 2016-03-22); repository last pushed 2016-03-31; not archived.
+      Read from https://repo.packagist.org/p2/meetdemio/demio-php-sdk.json and the GitHub
+      repository API on 2026-08-12.
+  - language: javascript
+    registry: npm
+    name: demio-ui
+    version: 5.5.17
+    published: '2026-08-12'
+    url: https://www.npmjs.com/package/demio-ui
+    install: npm install demio-ui
+    repository: https://gitlab.com/banzai_io/demio/demio-ui
+    license: ISC
+    official: true
+    api_client: false
+    kind: ui-component-library
+    note: >-
+      Demio's internal UI library, actively released (publisher
+      volodymyr.lysytsia@banzai.io). Not a client for the Public Demio API. Version and
+      date read from registry.npmjs.org on 2026-08-12.
+  - language: javascript
+    registry: npm
+    name: demio-ui-kit
+    version: 5.0.3
+    published: '2026-05-08'
+    url: https://www.npmjs.com/package/demio-ui-kit
+    install: npm install demio-ui-kit
+    license: MIT
+    official: true
+    api_client: false
+    kind: ui-component-library
+    note: >-
+      "Demio resources and components that are shared across Demio applications."
+      Maintainers on demio.com and banzai.io addresses (miguel@demio.com,
+      lucas@demio.com). Not an API client.
+  - language: javascript
+    registry: npm
+    name: demio-code-rules
+    version: 0.3.2
+    published: '2018-03-13'
+    url: https://www.npmjs.com/package/demio-code-rules
+    install: npm install demio-code-rules
+    official: true
+    api_client: false
+    kind: lint-config
+    note: >-
+      "Demio code rules and linters configuration", published by miguel@demio.com. Not an
+      API client. Last published 2018-03-13.
+third_party:
+  - language: javascript
+    registry: npm
+    name: '@pipedream/demio'
+    version: 0.0.7
+    published: '2025-11-14'
+    url: https://www.npmjs.com/package/@pipedream/demio
+    official: false
+    note: Pipedream connector components. Not published by Demio.
+  - language: javascript
+    registry: npm
+    name: '@keystrokehq/demio'
+    version: 0.1.6
+    published: '2026-07-18'
+    url: https://www.npmjs.com/package/@keystrokehq/demio
+    official: false
+    note: Keystroke.ai connector. Not published by Demio.
+  - language: php
+    registry: packagist
+    name: netresearch/demio
+    version: null
+    published: null
+    url: https://packagist.org/packages/netresearch/demio
+    official: false
+    abandoned: true
+    note: >-
+      TYPO3 CMS extension integrating Demio webinars into a TYPO3 site, by Netresearch.
+      Marked abandoned on Packagist. Version not recorded — the package is third-party and
+      abandoned, so its release metadata was not queried.
+not_this_company:
+  - name: demioflow
+    registry: npm
+    publisher: amine@demiolabs.com
+    note: CLI for the "DemioFlow productivity platform" (demiolabs.com). Unrelated company.
+  - name: demio
+    registry: pypi
+    status: 404
+    note: No package named demio exists on PyPI.
+  - name: demio
+    registry: rubygems
+    status: 404
+    note: No gem named demio exists on RubyGems.
+gaps:
+  - >-
+    No official client library in JavaScript/TypeScript, Python, Ruby, Go, Java, C# or
+    Rust for the Public Demio API. PHP is the only language served, by a 2016 SDK.
+  - >-
+    The PHP SDK is not linked from the Demio Help Center or from the published API
+    Blueprint at publicdemioapi.docs.apiary.io — a developer following Demio's own
+    documentation would never learn it exists. It is discoverable only via Packagist or
+    the meetdemio GitHub org.
+evidence:
+  - url: https://repo.packagist.org/p2/meetdemio/demio-php-sdk.json
+    status: 200
+  - url: https://api.github.com/repos/meetdemio/demio-php-sdk
+    status: 200
+  - url: https://registry.npmjs.org/-/v1/search?text=demio&size=25
+    status: 200
+  - url: https://pypi.org/pypi/demio/json
+    status: 404
+  - url: https://rubygems.org/api/v1/gems/demio.json
+    status: 404

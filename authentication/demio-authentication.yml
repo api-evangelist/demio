@@ -1,0 +1,38 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/demio-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: ApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: Api-Key
+  description: Account API Key, from Demio Settings > API.
+  sources:
+  - openapi/demio-openapi.yml
+- name: ApiSecretHeader
+  type: apiKey
+  in: header
+  parameter: Api-Secret
+  description: Account API Secret, from Demio Settings > API.
+  sources:
+  - openapi/demio-openapi.yml
+- name: ApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: Account API Key supplied on the query string.
+  sources:
+  - openapi/demio-openapi.yml
+- name: ApiSecretQuery
+  type: apiKey
+  in: query
+  parameter: api_secret
+  description: Account API Secret supplied on the query string.
+  sources:
+  - openapi/demio-openapi.yml

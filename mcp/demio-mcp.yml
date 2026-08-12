@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: derived
+status: candidate
+source: openapi/demio-openapi.yml
+provider: Demio
+providerId: demio
+api: Public Demio API
+official_server: none-found
+searched:
+  - Demio Help Center, demio.com and the published API Blueprint at Apiary
+  - npm registry (@modelcontextprotocol scope, "demio", "banzai")
+  - public MCP registry / directory search
+found_third_party:
+  - name: Demio MCP (Composio)
+    vendor: Composio
+    url: https://composio.dev/toolkits/demio
+    first_party: false
+    note: >-
+      A third-party wrapper over the Demio REST API, hosted and operated by Composio.
+      Credentials are the customer's own Demio Api-Key/Api-Secret pair handed to a third
+      party. Not published by Demio, so it earns Demio no MCPServer pointer.
+  - name: Pipedream Demio components
+    vendor: Pipedream
+    url: https://pipedream.com/apps/demio
+    first_party: false
+note: >-
+  Demio publishes no hosted or remote MCP server. The tools below are a CANDIDATE mapping
+  derived one-to-one from the operations in the provider-published contract; they are not
+  published by Demio. Each tool's real input schema is the referenced operation's
+  parameters and requestBody in openapi/demio-openapi.yml.
+pointer_policy: >-
+  NO `MCPServer` pointer is wired in apis.yml. Demio serves no MCP server, and an
+  MCPServer pointer asserts that the provider does. The tool list below is our derivation
+  from their REST contract, not their product; crediting it would be the same error as
+  advertising a WellKnown pointer whose own probe records a 404. Only a first-party hosted
+  server changes this.
+transport: candidate
+auth:
+  model: api-key-pair
+  note: >-
+    A server would carry the account-wide Api-Key/Api-Secret pair. There is no OAuth flow
+    and no scope model, so a hosted multi-tenant server would have to store full-account
+    credentials per user rather than hold a delegated, scoped grant. Every tool below runs
+    with the same total account authority.
+tools:
+  - name: ping_demio
+    description: Verify Demio API credentials and report whether they are sandbox credentials.
+    source_operation: openapi/demio-openapi.yml#pingViaHeaders
+    read_only: true
+  - name: list_events
+    description: List active Demio Events, optionally filtered to upcoming, past or automated.
+    source_operation: openapi/demio-openapi.yml#listEvents
+    read_only: true
+  - name: get_event
+    description: Read one Event with its full list of Sessions (Dates).
+    source_operation: openapi/demio-openapi.yml#getEvent
+    read_only: true
+  - name: get_event_session
+    description: Read one Event Session (Date) by Event ID and Session ID.
+    source_operation: openapi/demio-openapi.yml#getEventSession
+    read_only: true
+  - name: register_for_event
+    description: >-
+      Register a person for an Event and return their unique join link. WRITE — creates a
+      registrant record and may trigger a Demio confirmation email to that person.
+    source_operation: openapi/demio-openapi.yml#registerForEvent
+    read_only: false
+    consequence: contacts-a-third-party
+    note: >-
+      No idempotency key exists on this operation and Demio does not document replay
+      behaviour, so a retrying agent can create duplicate registrations and duplicate
+      confirmation emails to a real person. Gate it behind explicit confirmation.
+  - name: list_session_participants
+    description: >-
+      List participants for a Session with attendance status and custom field values.
+    source_operation: openapi/demio-openapi.yml#listSessionParticipants
+    read_only: true
+    consequence: returns-personal-data
+    note: >-
+      Returns registrant names, email addresses and registration form-field values — PII,
+      unpaginated, for the whole Session.

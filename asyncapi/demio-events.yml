@@ -1,0 +1,69 @@
+generated: '2026-08-12'
+method: searched
+source: https://help.demio.com/en/articles/1987449-zapier-triggers
+provider: Demio
+providerId: demio
+api: Public Demio API
+spec_type: none
+asyncapi_published: false
+first_party_webhooks: false
+description: >-
+  Demio has a real event surface — registration, join, no-show and series-update
+  notifications — but does not expose it as a first-party webhook API. The only published
+  delivery path is the Demio Zapier app, so an integrator cannot subscribe an endpoint of
+  their own without routing through Zapier and paying the Zapier tax. There is no
+  AsyncAPI document, no webhook endpoint registration, no event payload reference, no
+  signature scheme and no delivery or retry semantics anywhere on the Demio developer
+  surface. Because these events are not addressable through Demio's own contract, no
+  `Webhooks` and no `AsyncAPI` pointer is wired in apis.yml — recording one would credit
+  Demio for an event surface it does not actually serve.
+delivery:
+  mechanism: partner-platform
+  platform: Zapier
+  app_docs: https://help.demio.com/en/articles/3527489-zapier-setup
+  customer_visible_endpoint: false
+  quota_note: >-
+    Zapier traffic consumes the same daily API-call quota as direct API calls (100/day on
+    a free trial, 5,000/day for paying customers), so an event subscription silently eats
+    the same budget as the REST integration.
+events:
+  - name: New Webinar Registration
+    trigger: zapier
+    fires: When someone registers for a selected Event.
+    scope: per-Event (the Event is chosen from a dropdown when the Zap is built)
+    note: Covers all Event types, including Like Live Replays.
+  - name: Joins Webinar
+    trigger: zapier
+    fires: When an attendee joins a selected Event.
+    scope: per-Event
+  - name: Does Not Attend Webinar
+    trigger: zapier
+    fires: >-
+      When a webinar ends and a Registrant did not attend. Documented not to fire for
+      On-Demand Sessions, where Registrants may join at any time and are therefore not
+      treated as no-shows.
+    scope: per-Event
+  - name: Webinar Update
+    trigger: zapier
+    fires: >-
+      When a Session from a Series Event ends, so that fields — including the new
+      date/time and the Unique Join Link — can be updated for Registrants carried over.
+    scope: per-Event
+actions:
+  - name: Create Registration for Webinar
+    platform: zapier
+    rest_equivalent: openapi/demio-openapi.yml#registerForEvent
+gaps:
+  - No AsyncAPI or event-schema document is published.
+  - No customer-registerable webhook endpoints; Zapier is the only subscriber.
+  - No payload reference, no signature/verification scheme, no retry or ordering guarantees.
+  - >-
+    Triggers are bound to a single Event each — there is no account-wide event stream, so
+    an integration must be rebuilt every time a new Event is created.
+evidence:
+  - url: https://help.demio.com/en/articles/1987449-zapier-triggers.md
+    status: 200
+  - url: https://help.demio.com/en/articles/1987911-zapier-actions.md
+    status: 200
+  - url: https://demio.com/.well-known/api-catalog
+    status: 404

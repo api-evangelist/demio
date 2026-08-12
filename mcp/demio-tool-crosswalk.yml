@@ -1,0 +1,68 @@
+generated: '2026-08-12'
+method: derived
+source: mcp/demio-mcp.yml + openapi/demio-openapi.yml
+provider: Demio
+providerId: demio
+api: Public Demio API
+note: >-
+  Demio publishes no MCP server and no GraphQL endpoint, so this crosswalk binds the
+  CANDIDATE tool set in mcp/demio-mcp.yml to the REST operations it was derived from.
+  Every binding is one-to-one and high confidence precisely because the tools were derived
+  from the operations — there is no independent published tool list to reconcile against.
+  Recorded so a future run against a real Demio MCP server (first-party, or the Composio
+  wrapper) has a baseline to diff.
+surfaces:
+  openapi:
+    file: openapi/demio-openapi.yml
+    origin: converted from the provider-published API Blueprint 1A
+    gated: false
+  graphql:
+    endpoint: null
+    gated: null
+  mcp:
+    url: null
+    gated: null
+    status: none-published
+crosswalk:
+  - tool: ping_demio
+    category: auth
+    rest: [pingViaHeaders]
+    binding: rest
+    confidence: high
+  - tool: list_events
+    category: events
+    rest: [listEvents]
+    binding: rest
+    confidence: high
+  - tool: get_event
+    category: events
+    rest: [getEvent]
+    binding: rest
+    confidence: high
+  - tool: get_event_session
+    category: events
+    rest: [getEventSession]
+    binding: rest
+    confidence: high
+  - tool: register_for_event
+    category: registration
+    rest: [registerForEvent]
+    binding: rest
+    confidence: high
+  - tool: list_session_participants
+    category: reporting
+    rest: [listSessionParticipants]
+    binding: rest
+    confidence: high
+mcp_only: []
+rest_only:
+  - operation: pingViaQuery
+    reason: >-
+      Query-string variant of pingViaHeaders. Deliberately not exposed as a tool — it
+      would place the account API secret in a URL.
+coverage:
+  tools_named: 6
+  tools_bound: 6
+  mcp_only: 0
+  rest_ops_total: 7
+  rest_ops_with_tool: 6

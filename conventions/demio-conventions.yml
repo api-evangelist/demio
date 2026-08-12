@@ -1,0 +1,134 @@
+generated: '2026-08-12'
+method: searched
+source: openapi/demio-openapi.yml
+docs:
+  - https://publicdemioapi.docs.apiary.io
+  - https://help.demio.com/en/articles/4544025-api-limitations
+provider: Demio
+providerId: demio
+api: Public Demio API
+description: >-
+  Cross-cutting request/response semantics for the Public Demio API, searched from the
+  API Blueprint Demio publishes at Apiary and from the Demio Help Center, and derived
+  from openapi/demio-openapi.yml.
+
+authentication:
+  style: api-key-pair
+  schemes:
+    - transport: header
+      parameters: [Api-Key, Api-Secret]
+      preferred: true
+    - transport: query
+      parameters: [api_key, api_secret]
+      note: >-
+        Documented alternative. Places the account secret in the URL, so it leaks into
+        proxy logs, server access logs and browser history — prefer the header form.
+  verification_endpoint: GET /ping
+  key_management: https://my.demio.com/manage/api-details
+  artifact: authentication/demio-authentication.yml
+
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://my.demio.com/api/v1
+  media_type_versioning: false
+  date_versioning: false
+  note: >-
+    The version is carried in the base path only. Demio publishes no version policy, no
+    version-negotiation header and no dated release train. v1 is the only version that
+    has ever existed.
+
+content:
+  request_media_type: application/json
+  response_media_type: application/json
+  charset: utf-8
+
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key is documented or present anywhere in the contract. PUT
+    /event/register is the only write operation; it uses PUT, which is nominally
+    idempotent by HTTP method, but Demio does not document replay behaviour, does not
+    accept a client-supplied key, and does not state whether repeating a registration
+    for the same email returns the original join link or creates a duplicate registrant.
+    A retrying client — or an agent — must dedupe on its own side. Because idempotency
+    is genuinely absent, no `Idempotency` pointer is wired in apis.yml.
+
+pagination:
+  supported: false
+  note: >-
+    Neither GET /events nor GET /report/{date_id}/participants documents a limit, offset,
+    page or cursor parameter, and neither response carries a next-page link or a total
+    count. Collections are returned whole. There is no published ceiling on the number of
+    Events or participants a single response may contain, so a large account cannot
+    predict response size.
+
+filtering:
+  - operation: listEvents
+    parameter: type
+    values: [upcoming, past, automated]
+  - operation: getEvent
+    parameter: active
+    values: ['true', 'false']
+    note: Restricts the returned dates array to active dates in a series.
+  - operation: listSessionParticipants
+    parameter: status
+    values: [attended, did not attend, completed, left early, banned]
+
+field_expansion:
+  supported: false
+  note: >-
+    No expand/fields/include parameter. GET /event/{id} always embeds the full dates
+    array; there is no sparse-fieldset control.
+
+custom_fields:
+  supported: true
+  note: >-
+    Registration accepts arbitrary additional properties keyed by the Unique Identifier
+    of each custom form field configured in the Event's Registration block. Participant
+    reports return the same fields as a custom_fields array of {id, name, value} objects.
+    The identifiers are account- and Event-specific, so they are not discoverable from
+    the contract — they are read out of the Demio UI.
+
+metadata:
+  supported: false
+
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation-id header is documented on requests or responses. There
+    is no published identifier a developer can quote to support when debugging a call.
+
+error_envelope:
+  shape: '{"messages": ["<human readable message>"]}'
+  ping_shape: '{"pong": false, "messages": ["<human readable message>"]}'
+  machine_readable_code: false
+  rfc9457: false
+  note: >-
+    Errors are a JSON object carrying a `messages` array of human-readable strings. There
+    is no stable error code, no error type URI and no field-level pointer, so a client
+    must string-match to branch on a specific failure. Validation failures return every
+    failed rule together in a single array.
+  artifact: errors/demio-problem-types.yml
+
+rate_limiting:
+  burst: 180 requests per minute
+  daily_quota: 100/day on a free trial, 5,000/day for paying customers, reset 00:00 UTC
+  signalling:
+    status_code: undocumented
+    headers: none
+  note: >-
+    Rate limits are published in prose but are not signalled in the protocol — no 429 is
+    documented and no RateLimit-*/Retry-After headers are described. A client cannot
+    discover remaining quota without opening the Demio Settings > API tab.
+  artifact: rate-limits/demio-rate-limits.yml
+
+events:
+  first_party_webhooks: false
+  note: >-
+    Demio publishes no first-party webhook or streaming surface. Registration, join,
+    no-show and event-update notifications are only reachable through the Demio Zapier
+    app. See asyncapi/demio-events.yml.
+
+lifecycle_artifact: lifecycle/demio-lifecycle.yml

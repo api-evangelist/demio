@@ -1,0 +1,82 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/demio-openapi.yml
+docs: https://publicdemioapi.docs.apiary.io
+provider: Demio
+providerId: demio
+api: Public Demio API
+format: custom
+format_note: >-
+  Not RFC 9457. Demio returns a JSON object with a `messages` array of human-readable
+  strings; the ping endpoints add a `pong: false` flag. There is no `type` URI, no stable
+  machine-readable error code, no field pointer and no application/problem+json media
+  type, so clients must branch on HTTP status and, for validation failures, string-match
+  the message text.
+envelope:
+  media_type: application/json
+  fields:
+    messages: array of human-readable strings
+    pong: boolean, ping endpoints only
+problems:
+  - status: 400
+    title: Validation failed
+    detail_examples:
+      - Name must be more than 2 symbols
+      - Wrong Email format
+    remediation: >-
+      Correct the offending registration fields. `name` must be longer than two
+      characters and `email` must be a valid address. All failed rules are returned
+      together in the messages array.
+    source_operation: openapi/demio-openapi.yml#registerForEvent
+  - status: 400
+    title: Malformed request body
+    detail_examples:
+      - Bad Request syntax. Try to check request Body data JSON format.
+    remediation: Send a syntactically valid JSON body with Content-Type application/json.
+    source_operation: openapi/demio-openapi.yml#registerForEvent
+  - status: 401
+    title: Authorization failed
+    detail_examples:
+      - Authorization failed
+    remediation: >-
+      Check the Api-Key/Api-Secret headers (or api_key/api_secret query parameters)
+      against the credentials in Demio Settings > API. Verified live on 2026-08-12: an
+      unauthenticated GET https://my.demio.com/api/v1/ping returns HTTP 401
+      {"pong":false,"messages":["Authorization failed"]}, and GET
+      https://my.demio.com/api/v1/events returns HTTP 401
+      {"messages":["Authorization failed"]}.
+    source_operation: openapi/demio-openapi.yml#pingViaHeaders
+  - status: 403
+    title: Account is not active
+    detail_examples:
+      - Account is not active
+    remediation: >-
+      The credentials are valid but the Demio account is not in an active state (expired
+      trial, suspended or unpaid). Resolve billing/account status in the Demio UI; no API
+      path exists to clear this.
+    source_operation: openapi/demio-openapi.yml#pingViaHeaders
+  - status: 404
+    title: Event not found
+    detail_examples:
+      - Event not found
+    remediation: Check the Event ID. Use GET /events to enumerate Events visible to the key.
+    source_operation: openapi/demio-openapi.yml#getEvent
+  - status: 404
+    title: Event Date not found
+    detail_examples:
+      - Event Date not found
+    remediation: >-
+      Check the date_id (Session ID). Use GET /event/{id} to enumerate the Sessions of an
+      Event; the dates[] array carries every valid date_id.
+    source_operation: openapi/demio-openapi.yml#getEventSession
+gaps:
+  - >-
+    No published error reference beyond the response examples in the API Blueprint. The
+    Help Center has no error-code page.
+  - >-
+    No documented status code or body for rate-limit exhaustion, even though Demio
+    publishes a 180 req/min burst limit and a daily call quota. A client cannot tell a
+    throttle from any other failure without string-matching whatever message is returned.
+  - >-
+    No error codes are stable identifiers, so message-text changes on Demio's side are a
+    silent breaking change for any client that branches on them.

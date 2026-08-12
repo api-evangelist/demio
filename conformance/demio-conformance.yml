@@ -1,0 +1,114 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/demio-openapi.yml
+docs:
+  - https://publicdemioapi.docs.apiary.io
+  - https://help.demio.com/en/articles/5151423-demio-security-privacy
+provider: Demio
+providerId: demio
+api: Public Demio API
+standards:
+  - id: openapi
+    conforms: false
+    evidence: >-
+      Demio publishes API Blueprint 1A via Apiary, not OpenAPI. The OpenAPI 3.0.3 document
+      in openapi/_original/ is an API Evangelist format conversion of that blueprint, not
+      a provider artifact.
+  - id: api-blueprint
+    conforms: true
+    evidence: >-
+      FORMAT 1A blueprint published by the Demio-owned Apiary project "publicdemioapi"
+      (Apiary owner name "Demio", lastUpdated 2022-04-19). Saved verbatim at
+      openapi/demio-api-blueprint-original.apib.
+  - id: rest
+    conforms: true
+    evidence: Resource-oriented JSON over HTTPS with GET and PUT verbs.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No oauth2 securityScheme and no OAuth documentation. Authorization is a single
+      account-wide API key/secret pair with no scopes, so scopes/ is not emitted.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration 404s on every Demio host.
+  - id: saml2
+    conforms: true
+    scope: web-application-only
+    evidence: >-
+      SAML 2.0 single sign-on for the Demio application on select plans. Not an API
+      authorization mechanism.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a bespoke {"messages": [...]} envelope with application/json, not
+      application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt 404s on demio.com and www.demio.com. The 200s on
+      help.demio.com and status.demio.com are Intercom's and Atlassian's files
+      respectively, not Demio's. See well-known/demio-well-known.yml.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header documented.
+  - id: idempotency-key
+    conforms: false
+    evidence: >-
+      No idempotency key header on the single write operation (PUT /event/register).
+  - id: rfc6585-rate-limit-signalling
+    conforms: false
+    evidence: >-
+      Rate limits are published in prose (180 req/min, daily quota) but no 429 status and
+      no RateLimit-*/Retry-After headers are documented.
+  - id: json-api
+    conforms: false
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No event or streaming specification published. Registration/join/no-show events
+      reach customers only through the Demio Zapier app.
+  - id: mcp
+    conforms: false
+    evidence: >-
+      No first-party Model Context Protocol server. The Demio MCP listings that exist
+      (Composio, Pipedream) are third-party wrappers over the REST API.
+  - id: a2a
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json return 404 on demio.com,
+      www.demio.com, help.demio.com and status.demio.com. The 200s on my.demio.com and
+      event.demio.com are SPA catch-alls returning HTML for every path, confirmed against
+      a control path on 2026-08-12.
+  - id: llms-txt
+    conforms: true
+    scope: help-centre-only
+    evidence: >-
+      https://help.demio.com/llms.txt returns 200 text/plain, a valid llms.txt index of
+      the Demio Help Center (~30KB, 220 linked articles with .md twins). It indexes the
+      product help centre, including the API Limitations article, but it is not a
+      developer-surface llms.txt and does not link the API Blueprint.
+  - id: gdpr
+    conforms: true
+    scope: platform
+    evidence: >-
+      Account-wide GDPR setting adding a consent checkbox to registration and embed
+      forms; documented GDPR deletion on request; Schrems II page published at
+      https://www.demio.com/schrems-ii.
+  - id: soc2
+    conforms: unknown
+    evidence: >-
+      No SOC 2 claim, trust center or audit report found on any Demio host.
+      trust.demio.com does not resolve. Demio publishes a Security & Privacy Help Center
+      article describing TLS, encryption and recovery objectives, but names no
+      certification.
+  - id: iso27001
+    conforms: unknown
+    evidence: No ISO 27001 claim found.
+  - id: tls-modern
+    conforms: true
+    evidence: See security/demio-domain-security.yml.
+note: >-
+  Demio publishes a security and privacy posture article but names no third-party
+  certification (SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP) and operates no trust center,
+  so no `Compliance` pointer is wired in apis.yml — the compliance check must not be
+  awarded on the strength of a self-described security page.

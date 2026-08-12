@@ -1,0 +1,22 @@
+generated: '2026-08-12'
+method: generated
+provider: Demio
+providerId: demio
+api: Public Demio API
+source: openapi/demio-openapi.yml
+note: >-
+  Demio publishes no AGENTS.md and no skill files. These are API Evangelist packaged Agent
+  Skills, grounded in operationIds that exist verbatim in
+  openapi/demio-openapi.yml (which is a faithful conversion of the API Blueprint
+  Demio publishes at Apiary). Every guardrail in them — no idempotency, no pagination, no
+  rate-limit headers, PII in the participant report — is a documented property of the
+  contract, captured in conventions/, errors/ and rate-limits/.
+skills:
+  - file: demio-register-attendee-and-return-join-link.md
+    name: Register an attendee and return their unique join link
+    api: openapi/demio-openapi.yml
+    operations: [pingViaHeaders, listEvents, getEvent, registerForEvent]
+  - file: demio-pull-session-attendance-report.md
+    name: Pull the attendance report for a webinar Session
+    api: openapi/demio-openapi.yml
+    operations: [pingViaHeaders, listEvents, getEvent, getEventSession, listSessionParticipants]

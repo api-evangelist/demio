@@ -1,0 +1,63 @@
+generated: '2026-08-12'
+method: searched
+source: https://publicdemioapi.docs.apiary.io
+provider: Demio
+providerId: demio
+api: Public Demio API
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://my.demio.com/api/v1
+  policy_url: null
+  note: >-
+    v1 is the only version ever published. Demio documents no versioning policy, no
+    version-negotiation header and no support window for older versions.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no
+    published notice period. Nothing in the contract is marked deprecated. Because there
+    is genuinely no deprecation policy, no `Deprecation` pointer is wired in apis.yml.
+changelog:
+  url: null
+  note: >-
+    No API changelog or release-notes surface exists. The API Blueprint published at
+    Apiary reports lastUpdated 2022-04-19, so the documented contract has been static for
+    more than four years. Demio ships product changes through Help Center articles and
+    the marketing blog, neither of which is dated release notes for the API.
+    https://www.demio.com/changelog and https://www.demio.com/product-updates both 404.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment for the API. Demio publishes platform recovery
+    objectives in its Security & Privacy article.
+  recovery_objectives:
+    rto: 1 hour
+    rpo: 24 hours
+    source: https://help.demio.com/en/articles/5151423-demio-security-privacy
+status_page: https://status.demio.com
+status_page_platform: Atlassian Statuspage
+status_page_api: https://status.demio.com/api/v2/summary.json
+status_components:
+  - name: Webinar Room API
+    group: true
+    note: >-
+      The status page tracks a component named "Webinar Room API" — the real-time webinar
+      room service, not the Public Demio REST API at my.demio.com/api/v1, which has no
+      component of its own. Read live on 2026-08-12; status operational.
+  - name: Landing Website
+deprecated_operations: []
+gaps:
+  - No versioning policy, no deprecation policy, no Sunset/Deprecation header support.
+  - No API changelog; the published contract has not been updated since 2022-04-19.
+  - The status page has no component for the public REST API itself.
+evidence:
+  - url: https://status.demio.com/api/v2/summary.json
+    status: 200
+  - url: https://jsapi.apiary.io/apis/publicdemioapi.apib
+    status: 200
+  - url: https://www.demio.com/product-updates
+    status: 404

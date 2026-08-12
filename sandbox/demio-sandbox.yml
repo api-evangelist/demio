@@ -1,0 +1,65 @@
+generated: '2026-08-12'
+method: searched
+source: https://publicdemioapi.docs.apiary.io
+provider: Demio
+providerId: demio
+api: Public Demio API
+description: >-
+  Demio's contract distinguishes sandbox credentials from live credentials — GET /ping
+  returns a `sandbox` boolean — but Demio publishes no self-serve way to obtain a sandbox
+  key pair and ships no test fixtures. This artifact records the distinction because it
+  is visible in the published contract, not because a documented sandbox programme
+  exists.
+test_live_separation:
+  supported: true
+  mechanism: separate key/secret pair
+  signal:
+    operation: pingViaHeaders
+    field: sandbox
+    type: boolean
+    meaning: True when the request was authorized with a sandbox key/secret pair.
+    source: openapi/demio-openapi.yml#pingViaHeaders
+  key_prefixes: none
+  note: >-
+    Demio API keys and secrets carry no live/test prefix. The only way to tell which mode
+    a credential is in is to call GET /ping and read the `sandbox` flag — which means a
+    client cannot know it is about to write to production until it has already
+    authenticated.
+obtaining_credentials:
+  self_serve: false
+  documented_procedure: null
+  note: >-
+    Neither the API Blueprint nor the Help Center documents how to request sandbox
+    credentials. The Settings > API tab (https://my.demio.com/manage/api-details) issues
+    one key/secret pair per account and reports daily usage; it is not documented as
+    issuing sandbox pairs.
+mock_server:
+  provider: Apiary
+  url: https://publicdemioapi.apiary-mock.com/api/v1/
+  first_party: false
+  note: >-
+    Apiary generates a mock server from any published blueprint. It is a docs-platform
+    feature, not a Demio-operated sandbox, and it returns the blueprint's example payloads
+    rather than account data.
+test_values:
+  cards: null
+  identifiers: null
+  note: >-
+    No magic test identifiers, seeded test Events, test registrants or trigger values are
+    published. There is no test clock or time-simulation facility — which matters here
+    because the whole data model is time-based (Sessions, attendance windows, no-show
+    determination) and cannot be simulated.
+free_trial:
+  url: https://www.demio.com/free-trial
+  api_quota: 100 calls per day
+  duration_days: 14
+  note: >-
+    The closest thing to a self-serve evaluation path is the 14-day free trial, which
+    carries a 100 call/day API quota against a real account with real registrant data.
+evidence:
+  - url: https://jsapi.apiary.io/apis/publicdemioapi.apib
+    status: 200
+  - url: https://help.demio.com/en/articles/4544025-api-limitations.md
+    status: 200
+  - url: https://www.demio.com/free-trial
+    status: 200

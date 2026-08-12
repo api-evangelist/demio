@@ -1,0 +1,74 @@
+generated: '2026-08-12'
+method: searched
+source: https://help.demio.com/en/articles/2303545-embed-your-registration-form
+provider: Demio
+providerId: demio
+description: >-
+  Demio ships client-side embeddable surfaces for registration capture and for listing
+  events. They are generated per Event from the Demio UI (Share tab > Embed Options) as a
+  copy-paste HTML+JS snippet — there is no published loader library, no npm package, no
+  documented initialization API and no versioned component contract. A developer cannot
+  construct an embed programmatically; they must generate it in the product. Recorded
+  because the surface is real and customer-facing, not because it is developer-addressable.
+requirements:
+  - The host page must support both HTML and JavaScript.
+distribution:
+  model: generated-snippet
+  loader_library: null
+  registry_package: null
+  versioned: false
+  note: >-
+    No CDN URL, npm package or documented loader is published, so the embed cannot be
+    pinned to a version and a consumer cannot tell what they are running.
+families:
+  - name: Inline Embed
+    description: The registration form rendered directly in the host page.
+    variants:
+      - name: Unstyled
+        description: >-
+          Blank form template that inherits the host page's styling. Documented NOT to
+          support UTM tags or registrant-location tracking — a real functional difference,
+          not just a cosmetic one.
+      - name: Styled
+        description: >-
+          Pre-styled form with configurable button text and colour.
+    behaviour:
+      timezone: >-
+        Session times are converted to the registrant's device timezone; the timezone code
+        is not displayed in the form.
+  - name: Popover Embed
+    description: The registration form in a pop-up modal.
+    variants:
+      - name: Link
+        description: Inline text link that opens the modal. Button text is capitalized.
+      - name: Button
+        description: The same popover triggered from a button.
+    behaviour:
+      timezone: >-
+        Session times are converted to the registrant's device timezone; the timezone code
+        is shown once a Registrant picks a Session, or when only one upcoming Session
+        exists.
+  - name: Showcase
+    description: >-
+      A hosted, shareable page listing multiple Events, which can be shared by direct URL
+      or embedded into a custom landing page.
+    docs: https://help.demio.com/en/articles/8205257-share-your-showcase
+platform_guides:
+  - {platform: WordPress, url: https://help.demio.com/en/articles/4366554-embed-your-registration-on-wordpress}
+  - {platform: ClickFunnels, url: https://help.demio.com/en/articles/937108-embed-your-registration-on-clickfunnels}
+  - {platform: Leadpages, url: https://help.demio.com/en/articles/2953830-embed-your-registration-on-leadpages}
+  - {platform: Shopify, url: https://help.demio.com/en/articles/4273039-embed-your-registration-on-shopify}
+relationship_to_api:
+  note: >-
+    The embed and the API do the same job by different routes: the embed posts a
+    registration from the browser, PUT /event/register does it server-side and returns the
+    unique join link. Teams that need the join link in their own CRM use the API or the
+    Zapier app; the embed does not expose the link to the host page.
+  api_equivalent: openapi/demio-openapi.yml#registerForEvent
+white_label:
+  docs: https://help.demio.com/en/articles/1307748-white-label-options-custom-domains-embed
+evidence:
+  - url: https://help.demio.com/en/articles/2303545-embed-your-registration-form.md
+    status: 200
+  - url: https://help.demio.com/llms.txt
+    status: 200

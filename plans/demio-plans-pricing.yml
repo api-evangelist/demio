@@ -1,0 +1,105 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.demio.com/pricing
+provider: Demio
+providerId: demio
+description: >-
+  Demio prices the webinar platform per host with an attendee-room-size dimension; the
+  Public Demio API is not a separately priced product and carries no API-specific plan.
+  What the plan does determine is the API daily call quota — 100 calls/day on the free
+  trial and 5,000 calls/day for any paying customer, with increases granted case by case
+  (see rate-limits/demio-rate-limits.yml). The Growth tier's monthly figure is rendered
+  client-side from the room-size and host-count selectors on the pricing page and is not
+  present as a static value in the page source, so it is recorded as null rather than
+  guessed.
+currency: USD
+billing_periods: [monthly, annual]
+plan_count: 4
+plans:
+  - name: Starter
+    price_monthly: 63
+    price_annual_per_month: 45
+    currency: USD
+    billing: per host, per month; annual price billed yearly
+    hosts: 1
+    attendee_room: 50
+    session_limit_hours: 3
+    stage_capacity: 4
+    event_admins: 15
+    api_quota_per_day: 5000
+    features:
+      - Live events and event series
+      - Basic engagement tools
+      - Analytics
+    support: Standard
+  - name: Growth
+    price_monthly: null
+    price_annual_per_month: null
+    currency: USD
+    billing: per host, per month; price varies by selected attendee room size
+    hosts: multiple (priced per host)
+    attendee_room: [150, 500, 1000, 3000]
+    session_limit_hours: 8
+    stage_capacity: 6
+    event_admins: 25
+    api_quota_per_day: 5000
+    features:
+      - Custom branding
+      - On-demand webinars
+      - 1080p streaming
+      - Restreaming
+      - Live captions
+    support: Standard
+    note: >-
+      Price is computed in the browser from the room-size and host selectors; no static
+      figure is published in the page source. Recorded as null rather than estimated.
+  - name: Premium
+    price_monthly: null
+    price_annual_per_month: 196
+    currency: USD
+    billing: per host, per month, paid yearly
+    hosts: unlimited
+    attendee_room: [150, 500, 1000, 3000]
+    session_limit_hours: 10
+    stage_capacity: 10
+    event_admins: 50
+    api_quota_per_day: 5000
+    features:
+      - Premium integrations
+      - Custom domains
+      - Demio AI
+      - Beta feature access
+    support: Priority support and a dedicated CSM
+  - name: Enterprise / custom
+    price_monthly: null
+    price_annual_per_month: null
+    currency: USD
+    billing: contact sales
+    attendee_room: above 3000 or custom
+    api_quota_per_day: negotiable
+    note: >-
+      Contact sales for larger attendee rooms or custom configurations. No published
+      price.
+free_trial:
+  available: true
+  duration_days: 14
+  tier: Growth features
+  limits:
+    attendees: 20
+    session_limit_hours: 1
+    api_quota_per_day: 100
+  url: https://www.demio.com/free-trial
+api_pricing:
+  separately_priced: false
+  metered: false
+  note: >-
+    API access is included with every plan at no incremental charge. The plan tier does
+    not change the API surface — only whether the account is a trial (100 calls/day) or a
+    paying customer (5,000 calls/day).
+evidence:
+  - url: https://www.demio.com/pricing
+    status: 200
+  - url: https://www.demio.com/free-trial
+    status: 200
+  - url: https://help.demio.com/en/articles/4544025-api-limitations.md
+    status: 200

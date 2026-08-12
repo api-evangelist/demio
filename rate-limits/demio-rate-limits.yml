@@ -1,0 +1,79 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Demio
+providerId: demio
+api: Public Demio API
+created: '2026-08-12'
+modified: '2026-08-12'
+generated: '2026-08-12'
+method: searched
+tags:
+  - Rate Limiting
+  - Webinars
+  - Marketing
+description: >-
+  Demio publishes both a burst rate limit and a per-account daily API-call quota in its
+  API Limitations Help Center article. The daily quota is shared across direct API calls
+  and third-party tools such as Zapier, and resets at 00:00 UTC. Usage against the daily
+  quota is visible in the account's Settings > API tab. Quota increases above 5,000
+  calls/day are requested through a form and approved case by case.
+sources:
+  - https://help.demio.com/en/articles/4544025-api-limitations
+  - https://publicdemioapi.docs.apiary.io
+limit_count: 3
+limits:
+  - name: Burst requests
+    scope: per-account
+    metric: requests_per_minute
+    limit: 180
+    timeFrame: minute
+    note: >-
+      Requests above 180 within any 60-second window return an error. Demio describes the
+      limit as spam/abuse protection. The error status code is not published.
+  - name: Daily API calls (free trial account)
+    scope: per-account
+    metric: requests_per_day
+    limit: 100
+    timeFrame: day
+    resets: '00:00 UTC'
+    note: Shared across the Demio API and third-party tools such as Zapier.
+  - name: Daily API calls (paying customer)
+    scope: per-account
+    metric: requests_per_day
+    limit: 5000
+    timeFrame: day
+    resets: '00:00 UTC'
+    note: >-
+      Shared across the Demio API and third-party tools such as Zapier. Increases are
+      requested through Demio's application form and approved case by case.
+response_headers:
+  ratelimit_limit: null
+  ratelimit_remaining: null
+  ratelimit_reset: null
+  retry_after: null
+  status_on_exhaustion: undocumented
+  note: >-
+    Demio documents no rate-limit response headers (X-RateLimit-*, RateLimit-*,
+    Retry-After) and no status code on exhaustion. This is the runtime signal an agent
+    needs and it does not exist: the only published surface for remaining quota is the
+    Settings > API usage tab in the web UI, which no client can read.
+usage_dashboard: https://my.demio.com/manage/api-details
+enforcement:
+  suspension: >-
+    Demio reserves the right to suspend API access where usage is not compliant with its
+    spam policy.
+  spam_policy: https://www.demio.com/spam-policy
+gaps:
+  - >-
+    No throttled HTTP status code (429 or otherwise) and no rate-limit response headers
+    are documented. Clients cannot read remaining quota from a response.
+  - >-
+    The daily quota is shared with Zapier traffic, so a marketing team's Zaps and a
+    developer's integration silently compete for the same 5,000 calls with no per-consumer
+    accounting.
+evidence:
+  - url: https://help.demio.com/en/articles/4544025-api-limitations.md
+    status: 200
+  - url: https://www.demio.com/spam-policy
+    status: 200

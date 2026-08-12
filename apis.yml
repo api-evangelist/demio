@@ -1,26 +1,221 @@
 aid: demio
 name: Demio
-description: 'Demio is a company surfaced via the API Evangelist harvest backlog (source: marketing-integration-graph)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Demio is a browser-based webinar and virtual-event platform built for B2B marketing and
+  sales teams, operated by Banzai International, Inc. (NASDAQ: BNZI). It runs live,
+  automated/evergreen, on-demand and series webinars with no attendee download, and pairs
+  them with customizable registration pages, embeddable registration forms, in-session
+  engagement tools (polls, handouts, featured actions, chat), recordings, Showcase event
+  listings and post-webinar analytics. Its public developer surface is the Public Demio
+  API — a key/secret authorized REST API at https://my.demio.com/api/v1 covering Events,
+  Event Sessions (Dates), attendee registration with unique join links, and per-Session
+  participation reporting. Demio documents the API as an Apiary API Blueprint, publishes
+  burst rate limits and daily call quotas, runs a public Atlassian Statuspage, ships one
+  first-party PHP SDK from its meetdemio GitHub organization, and offers a Zapier app with
+  registration, join, no-show and event-update triggers for teams that do not want to call
+  the API directly.
+image: https://cdn.prod.website-files.com/639df5c77a191c7268d2f9a2/63d939e13b301514d7b3dbab_60ee09e2a0845e4356fd7641_5a86d4765e69d200011f70a5_favicon-256.png
 url: https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:marketing-integration-graph
-x-tier: stub
-x-tier-reason: harvest
+x-tier: active
+x-tier-reason: public-rest-api-with-published-contract
+x-parent-company: 'Banzai International, Inc. (NASDAQ: BNZI)'
+x-related-repo: all/banzai
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Webinars
+- Virtual Events
+- Event Management
+- Marketing
+- Marketing Technology
+- Demand Generation
+- Video
+- Engagement Marketing
+- Lead Generation
+- SaaS
+- API
+apis:
+- aid: demio:demio-events-api
+  name: Demio Events API
+  description: >-
+    Events, Event Sessions (Dates) and attendee registration. List and read Events, read a
+    specific Session, and register a person for an Event to receive their unique join link.
+  humanURL: https://publicdemioapi.docs.apiary.io
+  baseURL: https://my.demio.com/api/v1
+  tags:
+  - Events
+  - Registration
+  properties:
+  - type: OpenAPI
+    url: openapi/demio-openapi.yml
+  - type: APIBlueprint
+    url: openapi/demio-api-blueprint-original.apib
+  - type: Documentation
+    url: https://publicdemioapi.docs.apiary.io
+  - type: APIReference
+    url: https://publicdemioapi.docs.apiary.io
+  - type: Authentication
+    url: authentication/demio-authentication.yml
+  - type: RateLimits
+    url: rate-limits/demio-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/demio-problem-types.yml
+  - type: Conventions
+    url: conventions/demio-conventions.yml
+  - type: DataModel
+    url: data-model/demio-data-model.yml
+  - type: Overlay
+    url: overlays/demio-openapi-overlay.yaml
+  - type: LLMsTxt
+    url: llms/demio-llms.txt
+- aid: demio:demio-reports-api
+  name: Demio Reports API
+  description: >-
+    Per-Session participation and attendance reporting — the participant list for an Event
+    Session with attendance status and registration custom-field values.
+  humanURL: https://publicdemioapi.docs.apiary.io
+  baseURL: https://my.demio.com/api/v1
+  tags:
+  - Reports
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/demio-openapi.yml
+  - type: APIBlueprint
+    url: openapi/demio-api-blueprint-original.apib
+  - type: Documentation
+    url: https://publicdemioapi.docs.apiary.io
+  - type: APIReference
+    url: https://publicdemioapi.docs.apiary.io
+  - type: Authentication
+    url: authentication/demio-authentication.yml
+  - type: RateLimits
+    url: rate-limits/demio-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/demio-problem-types.yml
+  - type: Conventions
+    url: conventions/demio-conventions.yml
+  - type: DataModel
+    url: data-model/demio-data-model.yml
+  - type: LLMsTxt
+    url: llms/demio-llms.txt
+- aid: demio:demio-intro-api
+  name: Demio Intro API
+  description: >-
+    Authorization verification. Confirms an account API key/secret pair is valid and
+    reports whether it is a sandbox credential.
+  humanURL: https://publicdemioapi.docs.apiary.io
+  baseURL: https://my.demio.com/api/v1
+  tags:
+  - Intro
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/demio-openapi.yml
+  - type: APIBlueprint
+    url: openapi/demio-api-blueprint-original.apib
+  - type: Documentation
+    url: https://publicdemioapi.docs.apiary.io
+  - type: APIReference
+    url: https://publicdemioapi.docs.apiary.io
+  - type: Authentication
+    url: authentication/demio-authentication.yml
+  - type: Sandbox
+    url: sandbox/demio-sandbox.yml
+  - type: LLMsTxt
+    url: llms/demio-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/demio-agentic-access.yml
+- type: DomainSecurity
+  url: security/demio-domain-security.yml
 - type: Website
-  url: https://demio.com/
+  url: https://www.demio.com
+- type: DeveloperPortal
+  url: https://publicdemioapi.docs.apiary.io
+- type: Documentation
+  url: https://publicdemioapi.docs.apiary.io
+- type: APIReference
+  url: https://publicdemioapi.docs.apiary.io
+- type: GettingStarted
+  url: https://help.demio.com/en/articles/4544025-api-limitations
+- type: Support
+  url: https://help.demio.com/en/
+- type: HelpCenter
+  url: https://help.demio.com/en/
+- type: Blog
+  url: https://www.demio.com/blog
+- type: GitHubOrganization
+  url: https://github.com/meetdemio
+- type: Pricing
+  url: https://www.demio.com/pricing
+- type: SignUp
+  url: https://www.demio.com/free-trial
+- type: Login
+  url: https://my.demio.com/login
+- type: TermsOfService
+  url: https://www.demio.com/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.banzai.io/legal/privacy-policy
+- type: StatusPage
+  url: https://status.demio.com
+- type: Integrations
+  url: https://www.demio.com/integrations
+- type: OpenAPI
+  url: openapi/demio-openapi.yml
+- type: APIBlueprint
+  url: openapi/demio-api-blueprint-original.apib
+- type: Authentication
+  url: authentication/demio-authentication.yml
+- type: Conventions
+  url: conventions/demio-conventions.yml
+- type: ErrorCatalog
+  url: errors/demio-problem-types.yml
+- type: RateLimits
+  url: rate-limits/demio-rate-limits.yml
+- type: Plans
+  url: plans/demio-plans-pricing.yml
+- type: Lifecycle
+  url: lifecycle/demio-lifecycle.yml
+- type: Conformance
+  url: conformance/demio-conformance.yml
+- type: DataModel
+  url: data-model/demio-data-model.yml
+- type: Sandbox
+  url: sandbox/demio-sandbox.yml
+- type: Packages
+  url: packages/demio-packages.yml
+- type: SDKs
+  url: packages/demio-packages.yml
+- type: Components
+  url: components/demio-components.yml
+- type: ToolCrosswalk
+  url: mcp/demio-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/demio-llms.txt
+- type: LLMsTxt
+  name: Demio Help Center llms.txt (provider-served, verbatim)
+  url: llms/demio-help-center-llms.txt
+- type: Overlay
+  url: overlays/demio-openapi-overlay.yaml
+- type: Examples
+  url: examples/demio-examples.yml
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 28
+  pass: local-v1
 x-vouched-by:
 - Drip
 - Improvado

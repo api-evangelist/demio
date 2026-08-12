@@ -42,5 +42,22 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Demio is a company surfaced via the API Evangelist harvest backlog (source: marketing-integration-graph) and added to the network as a stub for full-pipeline profiling.
-- https://demio.com/
+Demio is a browser-based webinar and virtual-event platform for B2B marketing and sales teams,
+operated by Banzai International, Inc. (NASDAQ: BNZI). Its public developer surface is the **Public
+Demio API** — a key/secret authorized REST API at `https://my.demio.com/api/v1` covering Events,
+Event Sessions (Dates), attendee registration with unique join links, and per-Session participation
+reporting.
+
+Demio publishes its contract as an **API Blueprint 1A** document at
+[publicdemioapi.docs.apiary.io](https://publicdemioapi.docs.apiary.io) (harvested verbatim to
+`openapi/demio-api-blueprint-original.apib`; last updated by Demio 2022-04-19). The OpenAPI 3.0.3
+document in `openapi/` is an API Evangelist format conversion of that blueprint — it is not an
+official Demio artifact.
+
+- Website: https://www.demio.com
+- API reference: https://publicdemioapi.docs.apiary.io
+- API limitations / rate limits: https://help.demio.com/en/articles/4544025-api-limitations
+- Status: https://status.demio.com
+- GitHub: https://github.com/meetdemio
+- Parent company profile: `all/banzai/` — the Public Demio API is the same contract, profiled there
+  under the parent brand.

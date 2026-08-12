@@ -1,0 +1,445 @@
+FORMAT: 1A
+HOST: https://my.demio.com/api/v1
+
+# Public Demio API
+
+# Group Intro
+
+
+## Authorization
+
+Every API request requires Authorization. 
+
+Authorization is available in two ways: sending a key/secret via Headers or using a Query string. For example we are using simple ping endpoints:
+
+
+### Ping via Headers [GET /ping]
+
+Headers with `Api-Key` and `Api-Secret`
+
++ Request
+    
+    + Headers
+
+            Api-Key: IG8a1PUHxa49rn3q250LVVkF84p5w03L 
+            Api-Secret: 1Wf20cConSV1zFiw
+            
++ Response 200 (application/json)
+    
+    + Attributes
+        + pong (boolean, required) - Pong result
+        + sandbox (boolean, optional) - If used sandbox key/secret
+        
+    + Body
+
+            {
+                "pong": true,
+                "sandbox": true
+            }
+            
++ Response 401 (application/json)
+
+        {
+            "pong": false,
+            "messages": [
+                "Authorization failed"
+            ]
+        }
+             
++ Response 403 (application/json)
+
+        {
+            "pong": false,
+            "messages": [
+                "Account is not active"
+            ]
+        }
+            
+        
+### Ping via Query string [GET /ping/query?api_key={api_key}&api_secret={api_secret}]
+
+Query string with params `api_key` and `api_secret`
+
++ Request
+
+    + Attributes
+        + api_key: `IG8a1PUHxa49rn3q250LVVkF84p5w03L` (string, required) - Api Key
+        + api_secret: `1Wf20cConSV1zFiw` (string, required) - Api Secret
+            
++ Response 200 (application/json)
+
+        {
+            "pong": true
+        }
+        
++ Response 401 (application/json)
+
+        {
+            "pong": false,
+            "messages": [
+                "Authorization failed"
+            ]
+        }
+             
++ Response 403 (application/json)
+
+        {
+            "pong": false,
+            "messages": [
+                "Account is not active"
+            ]
+        }
+            
+
+# Group Events
+
+
+## Events list [GET /events]
+
+Returns active (not canceled) Events grouped by Event ID and ordered by scheduled date/time (next upcoming session).
+Also, you can use query parameter `type` for getting only upcoming events list:  
+```
+GET /events?type=upcoming
+```
+
++ Parameters
+    + type (string) - `upcoming`, `past`, `automated`. Filter events by type
+
++ Response 200 (application/json)
+
+    + Attributes
+        + id (number, required) - Event ID
+        + name (string, required) - Event name
+        + description (string) - Event description
+        + date_id (number, required) - Event Date ID
+        + status (string, required) - Event Date status
+        + timestamp (number, required) - Scheduled date/time of Event Date in Unix Timestamp format
+        + zone (string, required) - Scheduled Timezone of Event Date
+        + registration_url (string, required) - Humanized Event Registration page URL
+        + automated: null (array, fixed) - Event is automated
+            + (object)
+                + duration: 0 (number, fixed) - Video duration in seconds
+                + ready: false (boolean, fixed) - Video is ready to be played
+        
+    + Body
+    
+            [
+                {
+                    "id": 62,
+                    "name": "First Webinar",
+                    "description": "First Webinar description"
+                    "date_id": 1218,
+                    "status": "running",
+                    "timestamp": 1456723800,
+                    "zone": "Europe/Kiev"
+                    "registration_url": "http://my.demio.loc/ref/FKXeiDqyQsRYbfiv"
+                    "automated": {
+                        "ready": true,
+                        "duration": 3620
+                    }
+                },
+                {
+                    "id": 45,
+                    "name": "Second Webinar",
+                    "description": "Second Webinar description"
+                    "date_id": 1196,
+                    "status": "scheduled",
+                    "timestamp": 1456765200,
+                    "zone": "America/New_York",
+                    "registration_url": "http://my.demio.loc/ref/pgRzWQhYLPmuboOA"
+                    "automated": null
+                },
+                {
+                    "id": 59,
+                    "name": "Company webinar",
+                    "description": "",
+                    "date_id": 1193,
+                    "status": "scheduled",
+                    "timestamp": 1460673000,
+                    "zone": "Europe/Amsterdam",
+                    "registration_url": "http://my.demio.loc/ref/QmQwocrT8vAGneSy"
+                    "automated": null
+                }
+            ]
+        
+        
+## Event info [GET /event/{id}?active={active}]
+
+Returns information about a specific Event with a full list of Event Sessions.
+Ordered by scheduled date/time
+
++ Parameters
+    + id (integer, required) - Event ID
+    + active: false (boolean, optional) - Return only active dates in series
+
++ Response 200 (application/json)
+
+    + Attributes
+        + id (number, fixed) - Event ID
+        + name (string, fixed) - Event name
+        + description (string, fixed) - Event description
+        + registrants_stay_registered (boolean, fixed) - Keep Registrants Registered Through Series flag
+        + registration_url (string, fixed) - Humanized Event Registration page URL
+        + next_date_id (number, fixed) - Next available (running or scheduled) Event Date ID
+        + automated: null (array, fixed) - Event is automated
+            + (object)
+                + duration: 0 (number, fixed) - Video duration in seconds
+                + ready: false (boolean, fixed) - Video is ready to be played
+        + dates (array, fixed) - List of all (scheduled, running, finished) Event Dates
+            + (object)
+                + date_id (number, fixed) - Event Date identifier
+                + status (string, fixed) - Status
+                + timestamp (number, fixed) - Unix timestamp
+                + datetime (string, fixed) - Human friendly date/time string
+                + zone (string, fixed) - Timezone
+        
+    + Body
+    
+            {
+                "id": 1,
+                "name": "My first Event",
+                "description": "My first Event description",
+                "registrants_stay_registered": false,
+                "registration_url": "http://my.demio.loc/ref/FKXeiDqyQsRYbfiv",
+                "next_date_id": 158,
+                "automated": {
+                    "ready": true,
+                    "duration": 5420
+                }
+                "dates": [
+                    {
+                        "date_id": 157,
+                        "status": "finished",
+                        "timestamp": 1455676000,
+                        "datetime": "March 24th, 2016 at 8:00PM EET",
+                        "zone": "Europe/Kiev"
+                    },
+                    {
+                        "date_id": 158,
+                        "status": "running",
+                        "timestamp": 1455776000,
+                        "datetime": "March 25th, 2016 at 8:00PM EET",
+                        "zone": "Europe/Kiev"
+                    },
+                    {
+                        "date_id": 159,
+                        "status": "scheduled",
+                        "timestamp": 1455876000,
+                        "datetime": "March 26th, 2016 at 8:00PM EET",
+                        "zone": "Europe/Kiev"
+                    }
+                ]
+            }
+            
++ Response 404 (application/json)
+
+        {
+            "messages": [
+                "Event not found"
+            ]
+        }
+        
+        
+## Event Session info [GET /event/{id}/date/{date_id}]
+
+Returns information about a specific Event Session
+
++ Parameters
+    + id (number, required) - Event ID
+    + date_id (number, required) - Event Date Id
+    
++ Response 200 (application/json)
+
+        {
+            "date_id": 1218,
+            "status": "scheduled",
+            "timestamp": 1456723800,
+            "datetime": "March 26th, 2016 at 8:00PM EET",
+            "zone": "Europe/Kiev"
+        }
+        
++ Response 404 (application/json)
+
+        {
+            "messages": [
+                "Event Date not found"
+            ]
+        }
+        
+        
+## Register [PUT /event/register]
+
+Registers someone to an Event. Returns the unique join link for that person.
+Request attributes will be automatically filtered.
+You can pass form field data in the request body.
+
++ Request A (application/json)
+
+    + Attributes
+        + id (number, optional) - Event ID. Can be defined as *null*
+        + ref_url (string, optional) - Event Registration page URL. It can be useful when you do not know Event ID, but have Event link. Can be defined as *null*.
+        + date_id (number, optional) - Event Date ID. If not defined, system uses nearest active Date. Can be defined as *null*. 
+        + name (string, required) - The registrant's first name.
+        + email (string, required) - The registrant's email address.
+        + last_name (string, optional) - The value for the predefined Last Name field.
+        + company (string, optional) - The value for the predefined Company field.
+        + website (string, optional) - The value for the predefined Website field.
+        + phone_number (string, optional) - The value for the predefined Phone Number field.
+        + gdpr (string, optional) - The value for the predefined GDPR field.
+        + custom_field* (string, optional) - The value of the custom field. Each custom field's unique identifier can be found within the Event's Registration block in the Customize tab.
+        
+        
+    + Body
+
+            {
+                "id": 1,
+                "ref_url": null,
+                "date_id": 35,
+                "name": "John Doe",
+                "email": "john.doe@gmail.com",
+            }
+  
+            
++ Response 201 (application/json)
+
+    + Attributes
+        + hash (string, fixed) - Unique Attendee hash to join the Webinar
+        + join_link (string, fixed) - Link to join the Webinar
+
+    + Body
+    
+            {
+                "hash": 
+                "join_link": "https://event.demio.com/join/fPaSYijVHXI6ZJgE"
+            }
+       
+       
++ Request B (application/json)
+
+        {
+            "id": null,
+            "ref_url": "http://my.demio.com/ref/7Ka0Ti56GdIWcfFR"
+            "date_id": null,
+            "name": "John",
+            "email": "john.doe@gmail.com",
+            "last_name": "Doe",
+            "website": "https://demio.com",
+            "phone": "+1-222-333-4455"
+        }
+        
++ Response 201 (application/json)
+    
+        {
+            "hash": 
+            "join_link": "https://event.demio.com/join/fPaSYijVHXI6ZJgE"
+        }
+        
+        
++ Request C (application/json)
+
+        {
+            "id": 1,
+            "name": "Jo",
+            "email": "john.doe[at]gmail.com"
+        }
+        
++ Response 400 (application/json)
+        
+        {
+            "messages": [
+                "Name must be more than 2 symbols",
+                "Wrong Email format"
+            ]
+        }
+            
+            
++ Request D (application/json)
+
+        {
+            "id": 1, "some wrong string"
+            "name": "John Doe",
+            "email": "john.doe@gmail.com"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "messages": [
+                "Bad Request syntax. Try to check request Body data JSON format."
+            ]
+        }
+        
+# Group Reports
+
+## Event Date participants [GET /report/{date_id}/participants?status={status}]
+
+Returns Event Date participants list. You can use GET param `status` to filter results.  
+
+Valid `status` param values:
+- attended
+- did not attend
+- completed
+- left early
+- banned
+
++ Parameters
+    + date_id (number, required) - Event Date Id
+    + status (string, optional) - GET param. Filter results by participation status: `attended`, `did not attend`, `completed`, `left early`, `banned`
+
++ Request A (application/json)
+
++ Response 200 (application/json)
+
+    + Attributes
+        + email (string, fixed) - Email
+        + name (string, fixed) - Name
+        + custom_fields (array, fixed) - Participant Custom Fields values
+            + (object)
+                + id (string, fixed) - Field identifier
+                + name (string, fixed) - Field name
+                + value (string, fixed) - Field value
+        + attended (boolean, fixed) - Participant attended the webinar
+        + status (string, fixed) - User participation status: `completed`, `did not attend`, `left early`, `banned`
+
+    + Body
+    
+            {
+                "participants": 
+                    [
+                        {
+                            "email": "gohn.doe@gmail.com",
+                            "name": "John",
+                            "custom_fields": [
+                                {
+                                    "id": "last_name",
+                                    "name": "Last Name",
+                                    "value": "Doe"
+                                },
+                                {
+                                    "id": "website",
+                                    "name": "Website",
+                                    "value": "https://demio.com"
+                                }
+                            ],
+                            "attended": true,
+                            "status": "completed"
+                        },
+                        {
+                            "email": "jane.doe@gmail.com",
+                            "name": "Jane Doe",
+                            "custom_fields": [],
+                            "attended": false,
+                            "status": "did not attend"
+                        }
+                    ]
+            }
+
++ Request B (application/json)
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "participants": []
+            }

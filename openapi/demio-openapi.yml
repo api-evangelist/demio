@@ -1,0 +1,600 @@
+openapi: 3.0.3
+info:
+  title: Public Demio API
+  version: v1
+  description: >-
+    Public REST API for Demio, the webinar and virtual-event platform operated by
+    Banzai International. The API exposes the Event, Event Session (Date),
+    registration and participant-reporting surface: list and read Events, read a
+    specific Event Session, register a person for an Event and receive their unique
+    join link, and pull the participant/attendance report for a Session. Every
+    request is authorized with an account API Key and API Secret, supplied either as
+    `Api-Key` / `Api-Secret` request headers or as `api_key` / `api_secret` query
+    string parameters. Keys are managed in the Demio Settings > API area.
+
+
+    Provenance: this document is a faithful format conversion of the API Blueprint
+    that Demio publishes at https://publicdemioapi.docs.apiary.io (blueprint source
+    https://jsapi.apiary.io/apis/publicdemioapi.apib, Apiary owner "Demio"). No
+    operation, parameter, response or field has been added that is not documented in
+    that blueprint. Descriptions, rate limits and error semantics are drawn from the
+    Demio Help Center. Live behaviour of `GET /ping` was re-verified on 2026-08-12
+    (HTTP 401 `{"pong":false,"messages":["Authorization failed"]}` without credentials),
+    and the blueprint fetched on 2026-08-12 is byte-identical to the copy harvested on
+    2026-08-06.
+  contact:
+    name: Demio Support
+    email: support@demio.com
+    url: https://help.demio.com/en/
+  termsOfService: https://www.demio.com/terms-and-conditions
+  x-source-format: API Blueprint 1A
+  x-source-url: https://jsapi.apiary.io/apis/publicdemioapi.apib
+  x-source-last-updated: '2022-04-19'
+  x-provenance: >-
+    Derived by API Evangelist from the provider-published API Blueprint. Not an
+    official Demio OpenAPI document.
+externalDocs:
+  description: Public Demio API documentation (Apiary)
+  url: https://publicdemioapi.docs.apiary.io
+servers:
+  - url: https://my.demio.com/api/v1
+    description: Production
+tags:
+  - name: Intro
+    description: Authorization checks.
+  - name: Events
+    description: Events, Event Sessions (Dates) and registration.
+  - name: Reports
+    description: Participation and attendance reporting.
+security:
+  - ApiKeyHeader: []
+    ApiSecretHeader: []
+paths:
+  /ping:
+    get:
+      tags: [Intro]
+      operationId: pingViaHeaders
+      summary: Ping via headers
+      description: >-
+        Verifies authorization using the `Api-Key` and `Api-Secret` request headers.
+        Returns whether the credentials resolve and whether they are sandbox
+        credentials.
+      security:
+        - ApiKeyHeader: []
+          ApiSecretHeader: []
+      responses:
+        '200':
+          description: Authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pong'
+              example:
+                pong: true
+                sandbox: true
+        '401':
+          description: Authorization failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingError'
+              example:
+                pong: false
+                messages: [Authorization failed]
+        '403':
+          description: Account is not active
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingError'
+              example:
+                pong: false
+                messages: [Account is not active]
+  /ping/query:
+    get:
+      tags: [Intro]
+      operationId: pingViaQuery
+      summary: Ping via query string
+      description: >-
+        Verifies authorization using the `api_key` and `api_secret` query string
+        parameters.
+      security:
+        - ApiKeyQuery: []
+          ApiSecretQuery: []
+      parameters:
+        - name: api_key
+          in: query
+          required: true
+          description: Api Key
+          schema:
+            type: string
+        - name: api_secret
+          in: query
+          required: true
+          description: Api Secret
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pong'
+              example:
+                pong: true
+        '401':
+          description: Authorization failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingError'
+        '403':
+          description: Account is not active
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingError'
+  /events:
+    get:
+      tags: [Events]
+      operationId: listEvents
+      summary: Events list
+      description: >-
+        Returns active (not canceled) Events grouped by Event ID and ordered by
+        scheduled date/time (next upcoming session). Use the `type` query parameter
+        to filter to upcoming, past or automated Events.
+      parameters:
+        - name: type
+          in: query
+          required: false
+          description: Filter events by type
+          schema:
+            type: string
+            enum: [upcoming, past, automated]
+      responses:
+        '200':
+          description: A list of Events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventSummary'
+              example:
+                - id: 62
+                  name: First Webinar
+                  description: First Webinar description
+                  date_id: 1218
+                  status: running
+                  timestamp: 1456723800
+                  zone: Europe/Kiev
+                  registration_url: https://my.demio.com/ref/FKXeiDqyQsRYbfiv
+                  automated:
+                    ready: true
+                    duration: 3620
+                - id: 45
+                  name: Second Webinar
+                  description: Second Webinar description
+                  date_id: 1196
+                  status: scheduled
+                  timestamp: 1456765200
+                  zone: America/New_York
+                  registration_url: https://my.demio.com/ref/pgRzWQhYLPmuboOA
+                  automated: null
+  /event/{id}:
+    get:
+      tags: [Events]
+      operationId: getEvent
+      summary: Event info
+      description: >-
+        Returns information about a specific Event with the full list of Event
+        Sessions (Dates), ordered by scheduled date/time.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Event ID
+          schema:
+            type: integer
+        - name: active
+          in: query
+          required: false
+          description: Return only active dates in series
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: The Event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '404':
+          description: Event not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                messages: [Event not found]
+  /event/{id}/date/{date_id}:
+    get:
+      tags: [Events]
+      operationId: getEventSession
+      summary: Event Session info
+      description: Returns information about a specific Event Session (Date).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Event ID
+          schema:
+            type: integer
+        - name: date_id
+          in: path
+          required: true
+          description: Event Date ID
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The Event Session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDate'
+              example:
+                date_id: 1218
+                status: scheduled
+                timestamp: 1456723800
+                datetime: March 26th, 2016 at 8:00PM EET
+                zone: Europe/Kiev
+        '404':
+          description: Event Date not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                messages: [Event Date not found]
+  /event/register:
+    put:
+      tags: [Events]
+      operationId: registerForEvent
+      summary: Register
+      description: >-
+        Registers someone for an Event and returns the unique join link for that
+        person. Request attributes are automatically filtered; registration form
+        field data may be passed in the request body. Custom fields are keyed by the
+        field's Unique Identifier as configured in the Event's Registration block.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+            examples:
+              byEventId:
+                summary: Register by Event ID
+                value:
+                  id: 1
+                  ref_url: null
+                  date_id: 35
+                  name: John Doe
+                  email: john.doe@gmail.com
+              byRefUrl:
+                summary: Register by registration page URL
+                value:
+                  id: null
+                  ref_url: https://my.demio.com/ref/7Ka0Ti56GdIWcfFR
+                  date_id: null
+                  name: John
+                  email: john.doe@gmail.com
+                  last_name: Doe
+                  website: https://demio.com
+                  phone: +1-222-333-4455
+      responses:
+        '201':
+          description: Registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+              example:
+                hash: fPaSYijVHXI6ZJgE
+                join_link: https://event.demio.com/join/fPaSYijVHXI6ZJgE
+        '400':
+          description: Validation failed or malformed request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                validation:
+                  value:
+                    messages:
+                      - Name must be more than 2 symbols
+                      - Wrong Email format
+                syntax:
+                  value:
+                    messages:
+                      - Bad Request syntax. Try to check request Body data JSON format.
+  /report/{date_id}/participants:
+    get:
+      tags: [Reports]
+      operationId: listSessionParticipants
+      summary: Event Date participants
+      description: >-
+        Returns the participant list for an Event Session (Date). Use the `status`
+        query parameter to filter results by participation status.
+      parameters:
+        - name: date_id
+          in: path
+          required: true
+          description: Event Date ID
+          schema:
+            type: integer
+        - name: status
+          in: query
+          required: false
+          description: Filter results by participation status
+          schema:
+            type: string
+            enum: [attended, did not attend, completed, left early, banned]
+      responses:
+        '200':
+          description: Participants for the Session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipantList'
+              example:
+                participants:
+                  - email: john.doe@gmail.com
+                    name: John
+                    custom_fields:
+                      - id: last_name
+                        name: Last Name
+                        value: Doe
+                      - id: website
+                        name: Website
+                        value: https://demio.com
+                    attended: true
+                    status: completed
+                  - email: jane.doe@gmail.com
+                    name: Jane Doe
+                    custom_fields: []
+                    attended: false
+                    status: did not attend
+components:
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Account API Key, from Demio Settings > API.
+    ApiSecretHeader:
+      type: apiKey
+      in: header
+      name: Api-Secret
+      description: Account API Secret, from Demio Settings > API.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Account API Key supplied on the query string.
+    ApiSecretQuery:
+      type: apiKey
+      in: query
+      name: api_secret
+      description: Account API Secret supplied on the query string.
+  schemas:
+    Pong:
+      type: object
+      required: [pong]
+      properties:
+        pong:
+          type: boolean
+          description: Pong result
+        sandbox:
+          type: boolean
+          description: True when sandbox key/secret were used
+    PingError:
+      type: object
+      properties:
+        pong:
+          type: boolean
+        messages:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: Human readable error messages
+          items:
+            type: string
+    Automated:
+      type: object
+      nullable: true
+      description: Present when the Event is automated
+      properties:
+        duration:
+          type: number
+          description: Video duration in seconds
+        ready:
+          type: boolean
+          description: Video is ready to be played
+    EventSummary:
+      type: object
+      required: [id, name, date_id, status, timestamp, zone, registration_url]
+      properties:
+        id:
+          type: number
+          description: Event ID
+        name:
+          type: string
+          description: Event name
+        description:
+          type: string
+          description: Event description
+        date_id:
+          type: number
+          description: Event Date ID
+        status:
+          type: string
+          description: Event Date status
+        timestamp:
+          type: number
+          description: Scheduled date/time of the Event Date, Unix timestamp
+        zone:
+          type: string
+          description: Scheduled timezone of the Event Date
+        registration_url:
+          type: string
+          description: Humanized Event registration page URL
+        automated:
+          $ref: '#/components/schemas/Automated'
+    EventDate:
+      type: object
+      properties:
+        date_id:
+          type: number
+          description: Event Date identifier
+        status:
+          type: string
+          description: Status
+        timestamp:
+          type: number
+          description: Unix timestamp
+        datetime:
+          type: string
+          description: Human friendly date/time string
+        zone:
+          type: string
+          description: Timezone
+    Event:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Event ID
+        name:
+          type: string
+          description: Event name
+        description:
+          type: string
+          description: Event description
+        registrants_stay_registered:
+          type: boolean
+          description: Keep Registrants registered through the series
+        registration_url:
+          type: string
+          description: Humanized Event registration page URL
+        next_date_id:
+          type: number
+          description: Next available (running or scheduled) Event Date ID
+        automated:
+          $ref: '#/components/schemas/Automated'
+        dates:
+          type: array
+          description: All (scheduled, running, finished) Event Dates
+          items:
+            $ref: '#/components/schemas/EventDate'
+    RegistrationRequest:
+      type: object
+      required: [name, email]
+      additionalProperties: true
+      description: >-
+        Registration payload. Additional properties are treated as custom form
+        fields, keyed by the field's Unique Identifier.
+      properties:
+        id:
+          type: number
+          nullable: true
+          description: Event ID
+        ref_url:
+          type: string
+          nullable: true
+          description: >-
+            Event registration page URL. Useful when the Event ID is unknown but the
+            Event link is known.
+        date_id:
+          type: number
+          nullable: true
+          description: >-
+            Event Date ID. When omitted the nearest active Date is used.
+        name:
+          type: string
+          description: The registrant's first name
+        email:
+          type: string
+          format: email
+          description: The registrant's email address
+        last_name:
+          type: string
+          description: Value for the predefined Last Name field
+        company:
+          type: string
+          description: Value for the predefined Company field
+        website:
+          type: string
+          description: Value for the predefined Website field
+        phone_number:
+          type: string
+          description: Value for the predefined Phone Number field
+        gdpr:
+          type: string
+          description: Value for the predefined GDPR field
+    Registration:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Unique Attendee hash used to join the webinar
+        join_link:
+          type: string
+          description: Link to join the webinar
+    ParticipantCustomField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Field identifier
+        name:
+          type: string
+          description: Field name
+        value:
+          type: string
+          description: Field value
+    Participant:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email
+        name:
+          type: string
+          description: Name
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParticipantCustomField'
+        attended:
+          type: boolean
+          description: Participant attended the webinar
+        status:
+          type: string
+          description: Participation status
+          enum: [completed, did not attend, left early, banned]
+    ParticipantList:
+      type: object
+      properties:
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'

@@ -1,0 +1,108 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes, 2026-08-12
+provider: Demio
+providerId: demio
+note: >-
+  Demio serves no first-party /.well-known/ document on any host it controls. Two
+  classes of false positive were ruled out and are recorded here so a later run does
+  not re-credit them. (1) my.demio.com (the API host) and event.demio.com (the webinar
+  room host) answer HTTP 200 with the same SPA/login HTML for every path, including a
+  control path that cannot exist — none of those 200s is a document. (2) help.demio.com
+  and status.demio.com each serve a real RFC 9116 security.txt, but neither is Demio's:
+  the help centre runs on Intercom (Canonical https://app.intercom.com/.well-known/security.txt)
+  and the status page runs on Atlassian Statuspage (Canonical
+  https://www.atlassian.com/.well-known/security.txt). Both are saved verbatim below and
+  marked first_party false. No SecurityTxt pointer and no Security pointer is wired for
+  Demio on the strength of a vendor's file.
+control_probe:
+  path: /zzz-control-does-not-exist-123
+  results:
+    - {host: www.demio.com, status: 404}
+    - {host: help.demio.com, status: 404}
+    - {host: status.demio.com, status: 404}
+    - {host: my.demio.com, status: 200, verdict: soft-404 catch-all, body: login HTML}
+    - {host: event.demio.com, status: 200, verdict: soft-404 catch-all, body: webinar room HTML}
+probes:
+  - host: demio.com
+    results:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+  - host: www.demio.com
+    results:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+  - host: my.demio.com
+    note: >-
+      API host (https://my.demio.com/api/v1). Every path returns 200 with identical
+      login HTML — soft-404 catch-all, confirmed against the control path.
+    results:
+      - {path: /.well-known/security.txt, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/openid-configuration, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/oauth-authorization-server, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/api-catalog, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/ai-plugin.json, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/agent-card.json, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/agent.json, status: 200, file: null, verdict: soft-404}
+  - host: event.demio.com
+    note: Webinar room host. Same soft-404 catch-all behaviour as my.demio.com.
+    results:
+      - {path: /.well-known/security.txt, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/agent-card.json, status: 200, file: null, verdict: soft-404}
+      - {path: /.well-known/agent.json, status: 200, file: null, verdict: soft-404}
+  - host: help.demio.com
+    results:
+      - path: /.well-known/security.txt
+        status: 200
+        file: demio-intercom-security.txt
+        first_party: false
+        operator: Intercom
+        canonical: https://app.intercom.com/.well-known/security.txt
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+  - host: status.demio.com
+    results:
+      - path: /.well-known/security.txt
+        status: 200
+        file: demio-statuspage-security.txt
+        first_party: false
+        operator: Atlassian Statuspage
+        canonical: https://www.atlassian.com/.well-known/security.txt
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+documents:
+  - path: /.well-known/security.txt
+    host: help.demio.com
+    status: 200
+    file: demio-intercom-security.txt
+    first_party: false
+  - path: /.well-known/security.txt
+    host: status.demio.com
+    status: 200
+    file: demio-statuspage-security.txt
+    first_party: false
+first_party_documents: 0
+pointer_policy: >-
+  NO `WellKnown` and NO `SecurityTxt` pointer is wired in apis.yml. Two paths returned 200
+  with a real RFC 9116 document, but neither document is Demio's — one is Intercom's and
+  one is Atlassian's, each canonicalised to the vendor's own host. A WellKnown pointer
+  asserts that the PROVIDER serves that discovery surface, and Demio does not. This file
+  records an absence; it must not be scored as a presence.

@@ -1,0 +1,116 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/demio-openapi.yml
+docs: https://publicdemioapi.docs.apiary.io
+provider: Demio
+providerId: demio
+api: Public Demio API
+description: >-
+  Entity-relationship graph derived from the schema $refs and id-reference fields in the
+  Public Demio API contract. The model is small and time-shaped: an Event is a webinar
+  definition, an Event Date (called a Session in the Demio UI and in the Help Center) is
+  one scheduled occurrence of it, and every registration and every attendance record hangs
+  off a Date, not off the Event.
+identifier_conventions:
+  style: opaque integers
+  prefixes: none
+  note: >-
+    Event IDs and Date IDs are bare integers with no type prefix, so an id alone does not
+    say what it identifies — a caller that mixes up `id` and `date_id` gets a 404 rather
+    than a type error. The registrant identifier is a 16-character alphanumeric `hash`
+    used to build the unique join link.
+entities:
+  - name: Event
+    description: A webinar definition — name, description, registration page, series settings.
+    schema: openapi/demio-openapi.yml#/components/schemas/Event
+    id_field: id
+    operations: [listEvents, getEvent]
+    relationships:
+      - type: has_many
+        target: EventDate
+        via: dates
+      - type: has_one
+        target: EventDate
+        via: next_date_id
+        note: The next running or scheduled Date.
+      - type: has_one
+        target: Automated
+        via: automated
+        note: Present and non-null only when the Event is an automated/evergreen Event.
+  - name: EventDate
+    aliases: [Session]
+    description: >-
+      One scheduled occurrence of an Event. Carries status (scheduled, running, finished),
+      a Unix timestamp, a humanized datetime string and a timezone.
+    schema: openapi/demio-openapi.yml#/components/schemas/EventDate
+    id_field: date_id
+    operations: [getEventSession, listSessionParticipants]
+    relationships:
+      - type: belongs_to
+        target: Event
+        via: path parameter id on /event/{id}/date/{date_id}
+      - type: has_many
+        target: Participant
+        via: /report/{date_id}/participants
+  - name: Automated
+    description: Automated/evergreen playback metadata for an Event.
+    schema: openapi/demio-openapi.yml#/components/schemas/Automated
+    id_field: null
+    relationships:
+      - type: belongs_to
+        target: Event
+        via: automated
+  - name: Registration
+    description: >-
+      The result of registering a person for an Event — a unique attendee hash and the
+      join link built from it.
+    schema: openapi/demio-openapi.yml#/components/schemas/Registration
+    id_field: hash
+    operations: [registerForEvent]
+    relationships:
+      - type: belongs_to
+        target: EventDate
+        via: date_id in the request body (nearest active Date when omitted)
+      - type: belongs_to
+        target: Event
+        via: id or ref_url in the request body
+  - name: Participant
+    description: >-
+      A registrant as seen from the attendance report for one Session — email, name,
+      custom field values, attended flag and participation status.
+    schema: openapi/demio-openapi.yml#/components/schemas/Participant
+    collection_schema: openapi/demio-openapi.yml#/components/schemas/ParticipantList
+    id_field: email
+    operations: [listSessionParticipants]
+    pii: true
+    relationships:
+      - type: belongs_to
+        target: EventDate
+        via: date_id path parameter
+      - type: has_many
+        target: CustomField
+        via: custom_fields
+  - name: CustomField
+    description: >-
+      An account-defined registration form field, keyed by a Unique Identifier configured
+      in the Event's Registration block.
+    schema: openapi/demio-openapi.yml#/components/schemas/ParticipantCustomField
+    id_field: id
+    relationships:
+      - type: belongs_to
+        target: Participant
+        via: custom_fields
+observations:
+  - >-
+    There is no Registrant entity addressable in its own right. A person exists only as a
+    row inside a Session's participant report, or as a returned hash at registration time.
+    There is no read-by-email, no update and no delete, so an integration cannot honour a
+    data-subject request through the API.
+  - >-
+    Attendance is only readable per Session. There is no account-wide or per-person view,
+    so building a cross-webinar attendance history means iterating every Event, then every
+    Date, then every participant list — against a 5,000 call/day quota.
+  - >-
+    The `hash` returned at registration is the only handle on a registrant, and it is
+    returned once. If the caller does not persist it, the join link is unrecoverable
+    through the API.

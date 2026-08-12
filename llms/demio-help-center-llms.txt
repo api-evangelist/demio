@@ -1,0 +1,235 @@
+# Demio Help Center
+
+> Help center for Demio
+
+## Getting Started
+
+- [New to Demio? Let's Walk Through it Together](https://help.demio.com/en/articles/2946950-new-to-demio-let-s-walk-through-it-together.md): A quick video overview of Demio to help you get started.
+- [Hosting an Event on Demio](https://help.demio.com/en/articles/2947908-hosting-an-event-on-demio.md): Now that you've walked through your Demio account, let's run an Event on Demio!
+- [Demio Webinars: Best Practices](https://help.demio.com/en/articles/5451298-demio-webinars-best-practices.md): Learn exactly how you can run a successful Event on Demio.
+
+## Creating an Event
+
+- [Creating an Event](https://help.demio.com/en/articles/3527840-creating-an-event.md): Learn how easy it is to create an Event and explore the different Event types.
+- [Standard vs. Series Event](https://help.demio.com/en/articles/4410923-standard-vs-series-event.md): Learn more about the Series Event type.
+- [Customize Options](https://help.demio.com/en/articles/2951740-customize-options.md): Explore all of the options you have for customizing your Event.
+- [Archive/Delete an Event](https://help.demio.com/en/articles/2928854-archive-delete-an-event.md): Learn how to archive an Event, or delete it completely.
+- [Copy/Duplicate an Event](https://help.demio.com/en/articles/3528377-copy-duplicate-an-event.md): Learn how to copy the settings from a previous Event.
+- [Registrant Activity Notifications](https://help.demio.com/en/articles/9363676-registrant-activity-notifications.md): All the ways you can stay updated on your Registrant Activity.
+- [How can I add a background image to a registration page in Demio?](https://help.demio.com/en/articles/13680693-how-can-i-add-a-background-image-to-a-registration-page-in-demio.md): How to Add a Background Image to a Registration Page in Demio
+- [Setting Event Time Zone and Language](https://help.demio.com/en/articles/3829701-setting-event-time-zone-and-language.md): Learn how to override your account defaults and set a specific time zone or language for each Event.
+- [Chat Preference](https://help.demio.com/en/articles/2951759-chat-preference.md): Learn the difference between Public and Private Chats and how to switch between the two, as well as how to disable the chat.
+- [Event Notifications](https://help.demio.com/en/articles/2303558-event-notifications.md): Learn how to manage the default email notifications.
+- [Redirect Options](https://help.demio.com/en/articles/3528406-redirect-options.md): Learn how to redirect Attendees to a custom page after your Event.
+- [Scheduling an Event](https://help.demio.com/en/articles/3829686-scheduling-an-event.md): Learn how to add upcoming Sessions to your Event.
+- [Cancelling a Session](https://help.demio.com/en/articles/3829691-cancelling-a-session.md): Learn how to cancel a single Session or a Recurring Schedule.
+- [Customize the Registration Page](https://help.demio.com/en/articles/2303544-customize-the-registration-page.md): Learn how to use the Registration Editor.
+- [Edit the Registration Form](https://help.demio.com/en/articles/3527853-edit-the-registration-form.md): Learn how to add Custom Form Fields to your Registration page.
+- [Setting A Session Registration Limit](https://help.demio.com/en/articles/3957840-setting-a-session-registration-limit.md): Learn how to limit the number of Registrants per Session in your Event.
+- [Post-Registration Thank You Page](https://help.demio.com/en/articles/2954759-post-registration-thank-you-page.md): Send Registrants to a custom landing page after they register.
+- [Managing Resources](https://help.demio.com/en/articles/2397335-managing-resources.md): Learn how to upload and manage any Resources from the Event options.
+- [Managing Materials](https://help.demio.com/en/articles/2954646-managing-materials.md): Learn how to upload and manage any Presentation Slides or Video Materials.
+- [Managing Admins](https://help.demio.com/en/articles/3528394-managing-admins.md): Learn how to invite and manage any Presenters or Moderators.
+- [Presenters and Moderators](https://help.demio.com/en/articles/3528384-presenters-and-moderators.md): Learn about the different Admin roles you can create and set up for your Event room.
+- [Integration Overview](https://help.demio.com/en/articles/2395310-integration-overview.md): A quick rundown of everything related to the integration options.
+- [Setting Up An Integration](https://help.demio.com/en/articles/2953788-setting-up-an-integration.md): Learn how to set up an integration.
+- [Custom Automations](https://help.demio.com/en/articles/2466583-custom-automations.md): Learn how to segment your contacts based on behavior.
+- [Passing the Unique Join Link](https://help.demio.com/en/articles/2953813-passing-the-unique-join-link.md): Learn how to send and save the Unique Join Link for each Registrant to your CRM.
+- [Adding Custom Code](https://help.demio.com/en/articles/2954743-adding-custom-code.md): Learn how to add custom code to your different Event pages.
+- [Why Aren't My Properties Showing in Demio's Field Mapping?](https://help.demio.com/en/articles/9579855-why-aren-t-my-properties-showing-in-demio-s-field-mapping.md): Understanding List and Field Mapping
+- [Integrate with OpenReel](https://help.demio.com/en/articles/11321868-integrate-with-openreel.md): Connect your OpenReel account to Demio.
+- [How can I retrieve participants from a session in Demio using the API?](https://help.demio.com/en/articles/13676999-how-can-i-retrieve-participants-from-a-session-in-demio-using-the-api.md): How to use API to pull a list of participants from your event.
+- [Restreaming Platforms](https://help.demio.com/en/articles/15300057-restreaming-platforms.md): Broadcast your Demio sessions to external platforms including YouTube Live, Facebook live and LinkedIn.
+
+## Evergreen Automated Events
+
+- [Automated vs. Standard Event](https://help.demio.com/en/articles/2303559-automated-vs-standard-event.md): Explore the differences between Standard and Automated Events.
+- [Automated Events: Best Practices](https://help.demio.com/en/articles/6306291-automated-events-best-practices.md): Learn how to create evergreen Events to generate leads 24/7.
+- [On-Demand](https://help.demio.com/en/articles/2303561-on-demand.md): Learn about On-Demand options available for Automated Events.
+- [AI Moderator for On-Demand Events](https://help.demio.com/en/articles/8769380-ai-moderator-for-on-demand-events.md): Create a personalized experience for attendees of your on-demand sessions with AI Moderator.
+- [Swapping the Automated Video](https://help.demio.com/en/articles/3873278-swapping-the-automated-video.md): Learn how to swap videos in your Automated Event.
+- [Convert Event Recording to On-Demand Session](https://help.demio.com/en/articles/8176433-convert-event-recording-to-on-demand-session.md): We make it easy to convert a past recorded session to On-Demand content.
+
+## Registration Process
+
+- [Registration Overview](https://help.demio.com/en/articles/2297199-registration-overview.md): Explore all the options surrounding your Registration choices.
+- [Source Tracking for Registrations](https://help.demio.com/en/articles/5455398-source-tracking-for-registrations.md): Learn how to track Registration sources for Registrants across your Events.
+- [1-Click Registration](https://help.demio.com/en/articles/2369442-1-click-registration.md): Learn how to send your contacts a single link to register.
+- [Collect Registrations Using Your Own Custom Page](https://help.demio.com/en/articles/9127442-collect-registrations-using-your-own-custom-page.md)
+- [Embed Your Registration Form](https://help.demio.com/en/articles/2303545-embed-your-registration-form.md): Learn how to capture Registrations from a custom landing page.
+- [Embed Your Registration on ClickFunnels](https://help.demio.com/en/articles/937108-embed-your-registration-on-clickfunnels.md): Learn everything you need to know about integrating Demio with ClickFunnels.
+- [Embed Your Registration on WordPress](https://help.demio.com/en/articles/4366554-embed-your-registration-on-wordpress.md): Learn everything you need to know about integrating Demio with WordPress.
+- [Embed Your Registration on Leadpages](https://help.demio.com/en/articles/2953830-embed-your-registration-on-leadpages.md): Learn everything you need to know about integrating Demio with Leadpages.
+- [Embed Your Registration on Shopify](https://help.demio.com/en/articles/4273039-embed-your-registration-on-shopify.md): Learn everything you need to know about integrating Demio with Shopify.
+
+## Managing Registrants
+
+- [People Overview](https://help.demio.com/en/articles/3344029-people-overview.md)
+- [Manage People](https://help.demio.com/en/articles/3524445-manage-people.md)
+- [Remove a Contact](https://help.demio.com/en/articles/3525797-remove-a-contact.md): Learn how to remove a contact from a specific Event or across your entire account.
+- [Edit Registrant Details](https://help.demio.com/en/articles/9112329-edit-registrant-details.md)
+
+## Running an Event
+
+- [Admin Checklist](https://help.demio.com/en/articles/1405821-admin-checklist.md): A few steps for any Presenters/Moderators to take to ensure they have a smooth experience on Demio.
+- [Running a Test Session](https://help.demio.com/en/articles/5106186-running-a-test-session.md): Run a test Session to rehearse for your Event.
+- [Starting/Stopping a Session](https://help.demio.com/en/articles/3237444-starting-stopping-a-session.md): Learn how to start and stop a webinar Session.
+- [Event Room](https://help.demio.com/en/articles/3453507-event-room.md): A quick overview of the Event Room and Admin backstage area.
+- [Adding a Virtual Background in Demio](https://help.demio.com/en/articles/5393771-adding-a-virtual-background-in-demio.md): Learn how to add a virtual Presenter background for your Events.
+- [Stage Size](https://help.demio.com/en/articles/5307697-stage-size.md): Learn about the Stage size, how it works, and better understand where the Stage size limit comes from.
+- [Managing Devices \(Webcam + Microphone\)](https://help.demio.com/en/articles/3272458-managing-devices-webcam-microphone.md): A brief overview on sharing devices as a Host or Presenter.
+- [Live Closed Captions \(Live CC\)](https://help.demio.com/en/articles/13622725-live-closed-captions-live-cc.md): How to access live captions during your event.
+- [Chat Box Overview](https://help.demio.com/en/articles/3448733-chat-box-overview.md): A quick overview of the Chat Box.
+- [Questions](https://help.demio.com/en/articles/3586333-questions.md): A quick overview of the Questions area.
+- [Admin Chat](https://help.demio.com/en/articles/3564797-admin-chat.md): A quick overview of the Admin Chat tab.
+- [Pop-Out Chat](https://help.demio.com/en/articles/3440603-pop-out-chat.md): A quick overview of the Pop-Out Chat feature.
+- [Resources: Polls](https://help.demio.com/en/articles/3452008-resources-polls.md): Learn how to create Polls for Attendees.
+- [Resources: Handouts](https://help.demio.com/en/articles/3453528-resources-handouts.md): Learn how to share files directly with Attendees.
+- [Resources: Featured Action \(Call-to-Action\)](https://help.demio.com/en/articles/3442463-resources-featured-action-call-to-action.md): Learn how to send Call-to-Action links to Attendees.
+- [Spotlight](https://help.demio.com/en/articles/5239314-spotlight.md): Learn how to use the Spotlight feature on Demio.
+- [Share a Slide Presentation](https://help.demio.com/en/articles/3269995-share-a-slide-presentation.md): Learn how to share your slide presentation.
+- [Share a Screen](https://help.demio.com/en/articles/3274924-share-a-screen.md): Learn how to share your screen directly.
+- [Share a Presentation with Screen Share](https://help.demio.com/en/articles/937112-share-a-presentation-with-screen-share.md): Learn how to share a PowerPoint/Keynote/Google Slides presentation directly.
+- [Share a Video](https://help.demio.com/en/articles/937130-share-a-video.md): Learn how to share a video.
+- [Room Size](https://help.demio.com/en/articles/3873827-room-size.md): Learn about the Attendee room size, how to increase it, and what occurs if you hit the limit during an Event.
+- [Attendee Overview](https://help.demio.com/en/articles/1634407-attendee-overview.md): Get a quick overview of the Attendee view of a webinar Event.
+- [Waiting Room](https://help.demio.com/en/articles/3873760-waiting-room.md): Learn about the waiting screen that Attendees see if they access their Unique Join Link before the Session begins.
+- [Invite Attendees on Stage and Manage Attendee Devices \(Webcam + Microphone\)](https://help.demio.com/en/articles/937102-invite-attendees-on-stage-and-manage-attendee-devices-webcam-microphone.md)
+
+## Attending an Event
+
+- [Manage Registration](https://help.demio.com/en/articles/3873866-manage-registration.md): Learn about the Manage Registration area that any Registrants and Admins can access.
+- [Attendee: Join an Event](https://help.demio.com/en/articles/1633691-attendee-join-an-event.md): Learn how easy it is for Attendees to join and view Demio Events.
+- [Attendee: Joining on Mobile](https://help.demio.com/en/articles/3050275-attendee-joining-on-mobile.md)
+- [Attendee: Share Devices \(Webcam + Microphone\)](https://help.demio.com/en/articles/3527776-attendee-share-devices-webcam-microphone.md)
+- [Attendee Checklist](https://help.demio.com/en/articles/3527816-attendee-checklist.md): Things to double check to allow a smooth Attendee viewing experience.
+- [Presenter Checklist](https://help.demio.com/en/articles/4579846-presenter-checklist.md): Things to double check to allow a smooth Presenter webinar experience.
+- [Event Room Mobile View](https://help.demio.com/en/articles/9327828-event-room-mobile-view.md): How the Event Room appears for mobile devices.
+- [Attendee: No Audio](https://help.demio.com/en/articles/11133708-attendee-no-audio.md): Troubleshooting steps for an Attendee to try when they are unable to hear audio.
+
+## Connectivity and Streaming
+
+- [Supported Browsers](https://help.demio.com/en/articles/2625269-supported-browsers.md): Outlining the browser support requirements for both Attendee and Admins.
+- [Minimum Speed Requirements](https://help.demio.com/en/articles/937136-minimum-speed-requirements.md)
+- [Do Events have a Delay/Latency?](https://help.demio.com/en/articles/1307745-do-events-have-a-delay-latency.md)
+- [Demio Access Problems? Stay Informed About System Status](https://help.demio.com/en/articles/9202855-demio-access-problems-stay-informed-about-system-status.md)
+- [Streaming at FHD, 1080p](https://help.demio.com/en/articles/13370498-streaming-at-fhd-1080p.md): How to achieve high resolution streaming in your event
+- [System Check](https://help.demio.com/en/articles/3455821-system-check.md): Learn how to select and test your microphone, webcam, speakers, and network speed.
+- [Clear Browser Settings](https://help.demio.com/en/articles/8995652-clear-browser-settings.md)
+- [Connectivity: Best Practices](https://help.demio.com/en/articles/3017995-connectivity-best-practices.md): Learn exactly what the connectivity test results mean and how you can improve them.
+- [Troubleshoot Streaming Quality Issues](https://help.demio.com/en/articles/9027488-troubleshoot-streaming-quality-issues.md)
+- [Troubleshoot Blocked Connection: Demio Ports and IPs to Whitelist](https://help.demio.com/en/articles/4581411-troubleshoot-blocked-connection-demio-ports-and-ips-to-whitelist.md): An overview of the IP addresses and ports to whitelist when you're on a restricted network.
+- [Enabling System Permissions](https://help.demio.com/en/articles/3046886-enabling-system-permissions.md): Learn how to enable webcam/microphone access for your browser on different operating systems.
+- [Enabling Browser and Device Permissions](https://help.demio.com/en/articles/3047100-enabling-browser-and-device-permissions.md): Learn how to enable webcam/microphone permissions in different browsers.
+- [Troubleshoot Device Issues \(Microphone, Camera, Headphones, Speaker\)](https://help.demio.com/en/articles/8995638-troubleshoot-device-issues-microphone-camera-headphones-speaker.md)
+- [Experiencing an Echo?](https://help.demio.com/en/articles/8400820-experiencing-an-echo.md): Learn how to solve an echo issue on Demio.
+
+## Webinar Recordings
+
+- [Recording Overview](https://help.demio.com/en/articles/2928769-recording-overview.md): Learn all about how recordings work.
+- [Recording Page Editor](https://help.demio.com/en/articles/3527760-recording-page-editor.md): Learn how to customize your Recording page.
+- [Closed Captions on Recordings \[Beta\]](https://help.demio.com/en/articles/7941532-closed-captions-on-recordings-beta.md): Check how to enable Closed Captions for your Recording in just a few clicks.
+- [Recording Process Time](https://help.demio.com/en/articles/1405350-recording-process-time.md): How to anticipate how long a recording may process before it is ready.
+- [Transcription](https://help.demio.com/en/articles/12676932-transcription.md): Learn all about how to edit transcripts or disable them.
+
+## Post-Webinar Analytics
+
+- [Activity Overview](https://help.demio.com/en/articles/3527749-activity-overview.md): Explore all of the analytics/reports available for your Events.
+- [Manage Chat Analytics](https://help.demio.com/en/articles/3525824-manage-chat-analytics.md): Learn how to manage all of the chat messages sent from your Events.
+- [Insights Overview](https://help.demio.com/en/articles/7985569-insights-overview.md): How to find your Event's Insights.
+- [Data Export](https://help.demio.com/en/articles/7981762-data-export.md): How our data export feature works.
+- [Replay Tracking](https://help.demio.com/en/articles/8609959-replay-tracking.md): Learn how you can track how many people view your Replays.
+- [Messages Overview](https://help.demio.com/en/articles/7981791-messages-overview.md): How to find the Messages Attendees send during your Events.
+- [Demio Download Center](https://help.demio.com/en/articles/10262202-demio-download-center.md): Centralized location to access and manage exported Data files.
+
+## Showcase Your Events
+
+- [What is Showcase?](https://help.demio.com/en/articles/8205201-what-is-showcase.md): Showcase your Demio Events on your custom landing page.
+- [Creating a Showcase](https://help.demio.com/en/articles/8205208-creating-a-showcase.md): Learn how easy it is to create a Showcase and explore the different Showcase types.
+- [Customize the Showcase Page](https://help.demio.com/en/articles/8205251-customize-the-showcase-page.md): Explore all of the options you have for customizing your Showcase.
+- [Share Your Showcase](https://help.demio.com/en/articles/8205257-share-your-showcase.md): Learn how to share your Showcase via a direct URL or by embedding it into a custom landing page.
+- [Showcase UTM Source Tracking](https://help.demio.com/en/articles/8420585-showcase-utm-source-tracking.md)
+
+## Boost Registrations
+
+- [What is Boost?](https://help.demio.com/en/articles/6885232-what-is-boost.md): Expand your promotion and drive new Registrants.
+- [How to Boost Registrations](https://help.demio.com/en/articles/6885279-how-to-boost-registrations.md): How to set up Boost for your content.
+- [Customize Sender Name in Email Template](https://help.demio.com/en/articles/7238993-customize-sender-name-in-email-template.md)
+- [Customize Boost Sharing Page](https://help.demio.com/en/articles/8049488-customize-boost-sharing-page.md): How to personalize your Sharing Page.
+
+## Account Settings
+
+- [Account Owner Settings](https://help.demio.com/en/articles/6456716-account-owner-settings.md): Explore all of the Account Settings you have access to as the Account Owner.
+- [Transfer Account Ownership](https://help.demio.com/en/articles/8715767-transfer-account-ownership.md): How to transfer account ownership to a different person on Demio.
+- [Password Sharing](https://help.demio.com/en/articles/8686260-password-sharing.md): Find out why you shouldn’t share a single Demio login with other people.
+- [Change Your Profile Picture](https://help.demio.com/en/articles/983570-change-your-profile-picture.md): How to set and change your profile picture on Demio.
+- [Change the Default Language](https://help.demio.com/en/articles/3524482-change-the-default-language.md): Learn how to change the default language applied when you create an Event.
+- [GDPR Settings](https://help.demio.com/en/articles/2449217-gdpr-settings.md): Is Demio GDPR Compliant?
+- [Two-Factor Authentication \(2FA\)](https://help.demio.com/en/articles/4794494-two-factor-authentication-2fa.md): Set up two-factor authentication \(2FA\) to keep your account extra secure.
+- [Custom Branding Overview](https://help.demio.com/en/articles/3527843-custom-branding-overview.md): Your options involving custom Branding on Demio.
+- [Custom Domain](https://help.demio.com/en/articles/5225586-custom-domain.md): Learn how Custom Domains work and how to set one up.
+- [Manage Team Members](https://help.demio.com/en/articles/3527405-manage-team-members.md): Learn how to add and manage Team Members for your account.
+- [Manage your Email Settings](https://help.demio.com/en/articles/3524469-manage-your-email-settings.md)
+- [API Limitations](https://help.demio.com/en/articles/4544025-api-limitations.md): The Demio API makes it easy for developers to run actions or access data through other applications. Learn more about our limitations.
+- [Manage Your Billing](https://help.demio.com/en/articles/3525753-manage-your-billing.md): Learn how to update your billing details or change your plan.
+- [Host-based Pricing](https://help.demio.com/en/articles/5407079-host-based-pricing.md): Learn all about our Host-based pricing model, how it all works, and what will happen to existing subscription plans.
+- [Access Invoices for All Past Payments](https://help.demio.com/en/articles/4964787-access-invoices-for-all-past-payments.md): Add your billing information for your paid plan.
+- [Cancel Your Account](https://help.demio.com/en/articles/3525771-cancel-your-account.md): Everything you need to know for cancelling your account/subscription.
+- [Why am I being charged again for my subscription on Demio?](https://help.demio.com/en/articles/13431649-why-am-i-being-charged-again-for-my-subscription-on-demio.md): Understanding your billing cycle
+
+## CRM Integrations
+
+- [Connect an Integration](https://help.demio.com/en/articles/937137-connect-an-integration.md): Learn how to connect your integration tool to Demio.
+- [Integrate with Salesforce](https://help.demio.com/en/articles/6461410-integrate-with-salesforce.md): Connect your Demio account to Salesforce.
+- [Integrate with AWeber](https://help.demio.com/en/articles/3517388-integrate-with-aweber.md): Connect your Demio account to AWeber.
+- [Integrate with Keap](https://help.demio.com/en/articles/3520062-integrate-with-keap.md): Connect your Demio account to Keap.
+- [Integrate with ActiveCampaign](https://help.demio.com/en/articles/3520123-integrate-with-activecampaign.md): Connect your Demio account to ActiveCampaign.
+- [Integrate with Drip](https://help.demio.com/en/articles/3520135-integrate-with-drip.md): Connect your Demio account to Drip.
+- [Integrate with Ontraport](https://help.demio.com/en/articles/3520138-integrate-with-ontraport.md): Connect your Demio account to Ontraport.
+- [Integrate with GetResponse](https://help.demio.com/en/articles/3550694-integrate-with-getresponse.md): Connect your Demio account to GetResponse.
+- [Integrate with Kit](https://help.demio.com/en/articles/3550706-integrate-with-kit.md): Connect your Demio account to Kit.
+- [Integrate with Marketo](https://help.demio.com/en/articles/4205135-integrate-with-marketo.md): Connect your Demio account to Marketo.
+- [Integrate with Mailchimp](https://help.demio.com/en/articles/2948787-integrate-with-mailchimp.md): Connect your Demio account to Mailchimp.
+- [Integrate with HubSpot](https://help.demio.com/en/articles/5651907-integrate-with-hubspot.md): Connect your Demio account to HubSpot.
+- [Integrate with Salesforce Pardot](https://help.demio.com/en/articles/6088019-integrate-with-salesforce-pardot.md): Connect your Demio account to Salesforce Pardot.
+- [HubSpot Active Lists & Workflow Branches](https://help.demio.com/en/articles/9104413-hubspot-active-lists-workflow-branches.md): How to use Record Timeline Events to transfer information to HubSpot.
+- [Setting Up Salesforce Pardot](https://help.demio.com/en/articles/9843970-setting-up-salesforce-pardot.md)
+
+## Zapier Integration
+
+- [Zapier: Setup](https://help.demio.com/en/articles/3527489-zapier-setup.md): Learn how to set up a Zapier integration.
+- [Zapier: Actions](https://help.demio.com/en/articles/1987911-zapier-actions.md): Learn about the different Actions you can set up in Zapier.
+- [Zapier: Triggers](https://help.demio.com/en/articles/1987449-zapier-triggers.md): Learn about the different Triggers you can set up in Zapier.
+- [How to Send SMS Notifications](https://help.demio.com/en/articles/3469843-how-to-send-sms-notifications.md): A step-by-step process for sending SMS/instant messenger notifications for your Demio Events.
+- [Can I Run a Paid Event?](https://help.demio.com/en/articles/1161209-can-i-run-a-paid-event.md): How to run a paid Event with our Zapier workaround.
+- [Import Registrants to your Event Using Zapier](https://help.demio.com/en/articles/5223430-import-registrants-to-your-event-using-zapier.md): Learn how to import Registrants to your Event using Zapier.
+- [How to Integrate PayPal with Demio Using Zapier](https://help.demio.com/en/articles/4240299-how-to-integrate-paypal-with-demio-using-zapier.md): Learn how to create a Zap to add new PayPal customers as Registrants to a Demio Event.
+- [How to Integrate Stripe with Demio Using Zapier](https://help.demio.com/en/articles/4279347-how-to-integrate-stripe-with-demio-using-zapier.md): Learn how to set up a Zap to add new Stripe customers as Registrants to a Demio Event.
+- [How to Add Demio Registrants to Kajabi with their Unique Join Links](https://help.demio.com/en/articles/3984776-how-to-add-demio-registrants-to-kajabi-with-their-unique-join-links.md): Learn how to create a Zap to send Registrants from Demio to Kajabi with their Unique Join Links.
+- [Pass in Upcoming Session Date/Time with Zapier](https://help.demio.com/en/articles/5209948-pass-in-upcoming-session-date-time-with-zapier.md): Learn how to create a Zap to pass Registrant's upcoming Session date and time from Demio to your integration of choice.
+
+## Affiliate Program & Demio Fan Club
+
+- [Affiliate Program Overview](https://help.demio.com/en/articles/1304349-affiliate-program-overview.md): Learn about Demio's Affiliate program.
+- [Affiliate: Application Process](https://help.demio.com/en/articles/1713079-affiliate-application-process.md): Learn how to apply and get set up as an Affiliate.
+- [Affiliate: Referral Link](https://help.demio.com/en/articles/1720864-affiliate-referral-link.md): Learn how to access and customize your Referral Link.
+- [Affiliate: Custom Links](https://help.demio.com/en/articles/1713081-affiliate-custom-links.md): Learn how to create custom Affiliate links.
+- [Affiliate: Performance Details](https://help.demio.com/en/articles/1721065-affiliate-performance-details.md): Learn how to check and monitor the performance of your Affiliate account.
+
+## Frequently Asked Questions
+
+- [Demio's Free Trial](https://help.demio.com/en/articles/1837026-demio-s-free-trial.md)
+- [SAML Single Sign On \(SSO\)](https://help.demio.com/en/articles/8912841-saml-single-sign-on-sso.md)
+- [Demio Security & Privacy](https://help.demio.com/en/articles/5151423-demio-security-privacy.md)
+- [Can I Add Music to my Event?](https://help.demio.com/en/articles/4272970-can-i-add-music-to-my-event.md): Using the Video Materials, you can share your music as a video during the Event.
+- [Can I Run a Hybrid Event?](https://help.demio.com/en/articles/3957907-can-i-run-a-hybrid-event.md): Use a pre-recorded video for a portion of the Event and share live for another portion.
+- [Is There a Whiteboard Feature?](https://help.demio.com/en/articles/1307744-is-there-a-whiteboard-feature.md): Share a whiteboard that you can annotate on with others.
+- [How Can I Issue Post-Webinar Certificates?](https://help.demio.com/en/articles/9070439-how-can-i-issue-post-webinar-certificates.md)
+- [White Label Options \(Custom Domains/Embed\)](https://help.demio.com/en/articles/1307748-white-label-options-custom-domains-embed.md): Our current status for white labeling or embedding Events to run on a custom website or domain.
+- [Can I Host an Event for More Than 3000 Attendees?](https://help.demio.com/en/articles/9202811-can-i-host-an-event-for-more-than-3000-attendees.md)
+- [How to Add Facebook Pixel to your Event Pages](https://help.demio.com/en/articles/5240542-how-to-add-facebook-pixel-to-your-event-pages.md): Tracking conversions with Facebook Pixels.
+- [Event Room Roles and Permissions](https://help.demio.com/en/articles/6374918-event-room-roles-and-permissions.md): Defining the different Event Room roles in Demio and what permissions they have.
+- [Team Member Roles and Permissions](https://help.demio.com/en/articles/7993209-team-member-roles-and-permissions.md): Defining the different Team Member roles in Demio and what permissions they have.
+- [How to Save a Demio Event in your Calendar](https://help.demio.com/en/articles/6628227-how-to-save-a-demio-event-in-your-calendar.md)
+- [How to Web-Optimize Videos Before Uploading to Demio](https://help.demio.com/en/articles/4601463-how-to-web-optimize-videos-before-uploading-to-demio.md): Everything you need to know about optimizing your videos.
+- [Updating the Social Media Summary Card](https://help.demio.com/en/articles/5099169-updating-the-social-media-summary-card.md): Reset Open Graph settings by clearing Facebook, Twitter and LinkedIn cache.

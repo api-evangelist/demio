@@ -1,0 +1,62 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Public Demio API
+  version: 1.0.0
+extends: openapi/demio-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: >-
+  Derived from the API Evangelist enrichment pass on all/demio (2026-08-12). Captures our
+  annotations over the format conversion of Demio's published API Blueprint; the converted
+  document is never mutated.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: demio
+      x-apievangelist-parent-company: 'Banzai International (NASDAQ: BNZI)'
+      x-apievangelist-contract-source: API Blueprint 1A at https://jsapi.apiary.io/apis/publicdemioapi.apib
+      x-apievangelist-contract-last-updated: '2022-04-19'
+      x-apievangelist-artifacts:
+        authentication: authentication/demio-authentication.yml
+        conventions: conventions/demio-conventions.yml
+        errors: errors/demio-problem-types.yml
+        rate_limits: rate-limits/demio-rate-limits.yml
+        lifecycle: lifecycle/demio-lifecycle.yml
+        data_model: data-model/demio-data-model.yml
+        sandbox: sandbox/demio-sandbox.yml
+  - target: $.info
+    update:
+      x-apievangelist-gaps:
+        - No idempotency key on the single write operation.
+        - No pagination on either collection endpoint.
+        - Rate limits published in prose only; no 429 and no RateLimit-* headers documented.
+        - No stable machine-readable error codes; errors are human-readable strings.
+        - No first-party webhooks; events are delivered through Zapier only.
+  - target: $.paths['/event/register'].put
+    update:
+      x-apievangelist-consequence: contacts-a-third-party
+      x-apievangelist-idempotency: none
+      x-apievangelist-note: >-
+        The only write operation. Creates a registrant and may send a Demio confirmation
+        email to a real person. Demio does not document replay behaviour and accepts no
+        client-supplied idempotency key, so a retry can duplicate both the registrant and
+        the email. The returned `hash` is the only handle on the registrant and is
+        returned once — persist it or the join link is unrecoverable.
+  - target: $.paths['/report/{date_id}/participants'].get
+    update:
+      x-apievangelist-pii: true
+      x-apievangelist-note: >-
+        Returns registrant names, email addresses and registration form-field values for
+        an entire Session, unpaginated and with no published ceiling on response size.
+  - target: $.paths['/ping/query'].get
+    update:
+      x-apievangelist-warning: >-
+        Places the account API secret in the query string, where it is captured by proxy
+        logs, server access logs and browser history. Prefer the Api-Key/Api-Secret header
+        form on GET /ping.
+  - target: $.paths['/events'].get
+    update:
+      x-apievangelist-pagination: none
+      x-apievangelist-note: >-
+        Returns every active Event in one response. No limit/offset/cursor parameter and no
+        total count, against a 5,000 call/day account quota.

@@ -1,0 +1,177 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/demio-openapi.yml
+docs: https://publicdemioapi.docs.apiary.io
+provider: Demio
+providerId: demio
+api: Public Demio API
+note: Request and response examples extracted verbatim from the OpenAPI conversion of the API Blueprint
+  Demio publishes at Apiary. Every value here originates in Demio's own published documentation — none
+  was invented. Example API credentials that appeared in the blueprint are redacted.
+examples:
+- operationId: pingViaHeaders
+  method: GET
+  path: /ping
+  summary: Ping via headers
+  request: []
+  responses:
+  - status: '200'
+    media_type: application/json
+    value:
+      pong: true
+      sandbox: true
+  - status: '401'
+    media_type: application/json
+    value:
+      pong: false
+      messages:
+      - Authorization failed
+  - status: '403'
+    media_type: application/json
+    value:
+      pong: false
+      messages:
+      - Account is not active
+- operationId: pingViaQuery
+  method: GET
+  path: /ping/query
+  summary: Ping via query string
+  request: []
+  responses:
+  - status: '200'
+    media_type: application/json
+    value:
+      pong: true
+- operationId: listEvents
+  method: GET
+  path: /events
+  summary: Events list
+  request: []
+  responses:
+  - status: '200'
+    media_type: application/json
+    value:
+    - id: 62
+      name: First Webinar
+      description: First Webinar description
+      date_id: 1218
+      status: running
+      timestamp: 1456723800
+      zone: Europe/Kiev
+      registration_url: https://my.demio.com/ref/FKXeiDqyQsRYbfiv
+      automated:
+        ready: true
+        duration: 3620
+    - id: 45
+      name: Second Webinar
+      description: Second Webinar description
+      date_id: 1196
+      status: scheduled
+      timestamp: 1456765200
+      zone: America/New_York
+      registration_url: https://my.demio.com/ref/pgRzWQhYLPmuboOA
+      automated: null
+- operationId: getEvent
+  method: GET
+  path: /event/{id}
+  summary: Event info
+  request: []
+  responses:
+  - status: '404'
+    media_type: application/json
+    value:
+      messages:
+      - Event not found
+- operationId: getEventSession
+  method: GET
+  path: /event/{id}/date/{date_id}
+  summary: Event Session info
+  request: []
+  responses:
+  - status: '200'
+    media_type: application/json
+    value:
+      date_id: 1218
+      status: scheduled
+      timestamp: 1456723800
+      datetime: March 26th, 2016 at 8:00PM EET
+      zone: Europe/Kiev
+  - status: '404'
+    media_type: application/json
+    value:
+      messages:
+      - Event Date not found
+- operationId: registerForEvent
+  method: PUT
+  path: /event/register
+  summary: Register
+  request:
+  - media_type: application/json
+    name: byEventId
+    summary: Register by Event ID
+    value:
+      id: 1
+      ref_url: null
+      date_id: 35
+      name: John Doe
+      email: john.doe@gmail.com
+  - media_type: application/json
+    name: byRefUrl
+    summary: Register by registration page URL
+    value:
+      id: null
+      ref_url: https://my.demio.com/ref/7Ka0Ti56GdIWcfFR
+      date_id: null
+      name: John
+      email: john.doe@gmail.com
+      last_name: Doe
+      website: https://demio.com
+      phone: +1-222-333-4455
+  responses:
+  - status: '201'
+    media_type: application/json
+    value:
+      hash: fPaSYijVHXI6ZJgE
+      join_link: https://event.demio.com/join/fPaSYijVHXI6ZJgE
+  - status: '400'
+    media_type: application/json
+    name: validation
+    value:
+      messages:
+      - Name must be more than 2 symbols
+      - Wrong Email format
+  - status: '400'
+    media_type: application/json
+    name: syntax
+    value:
+      messages:
+      - Bad Request syntax. Try to check request Body data JSON format.
+- operationId: listSessionParticipants
+  method: GET
+  path: /report/{date_id}/participants
+  summary: Event Date participants
+  request: []
+  responses:
+  - status: '200'
+    media_type: application/json
+    value:
+      participants:
+      - email: john.doe@gmail.com
+        name: John
+        custom_fields:
+        - id: last_name
+          name: Last Name
+          value: Doe
+        - id: website
+          name: Website
+          value: https://demio.com
+        attended: true
+        status: completed
+      - email: jane.doe@gmail.com
+        name: Jane Doe
+        custom_fields: []
+        attended: false
+        status: did not attend
+example_count: 14
+operations_with_examples: 7
+operations_total: 7

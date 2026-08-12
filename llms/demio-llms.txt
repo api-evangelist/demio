@@ -1,0 +1,61 @@
+# Demio
+
+> Demio is a browser-based webinar and virtual-event platform for B2B marketing and sales teams, operated by Banzai International, Inc. (NASDAQ: BNZI). It runs live, automated/evergreen, on-demand and series webinars with no attendee download, and pairs them with registration pages, embeddable registration forms, engagement tools and post-webinar analytics. Its developer surface is the Public Demio API — a key/secret authorized REST API at https://my.demio.com/api/v1 covering Events, Event Sessions (Dates), attendee registration with unique join links, and per-Session participation reporting. Demio documents the API as an Apiary API Blueprint, publishes rate limits and daily call quotas, and runs a public Atlassian Statuspage.
+
+## Contract
+
+- [Public Demio API — API Blueprint 1A (verbatim, as published by Demio at Apiary)](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/openapi/demio-api-blueprint-original.apib): The provider's own machine-readable contract. Apiary project "publicdemioapi", owner "Demio", lastUpdated 2022-04-19.
+- [Public Demio API — OpenAPI 3.0.3 (API Evangelist conversion)](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/openapi/demio-openapi.yml): Faithful format conversion of the blueprint above. Not an official Demio document. 7 operations across Intro, Events and Reports.
+- [API Evangelist overlay](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/overlays/demio-openapi-overlay.yaml): Our annotations over the converted spec — consequence, PII and gap markers.
+
+## Operations
+
+- `GET /ping` — pingViaHeaders. Verify credentials; returns `sandbox` boolean.
+- `GET /ping/query` — pingViaQuery. Same, with the secret in the query string. Avoid.
+- `GET /events` — listEvents. All active Events; filter `type=upcoming|past|automated`.
+- `GET /event/{id}` — getEvent. One Event with its full `dates[]` (Sessions).
+- `GET /event/{id}/date/{date_id}` — getEventSession. One Session.
+- `PUT /event/register` — registerForEvent. Register a person; returns `hash` + `join_link`. The only write operation.
+- `GET /report/{date_id}/participants` — listSessionParticipants. Attendance report for one Session. Returns PII.
+
+## How it behaves
+
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/authentication/demio-authentication.yml): Account-wide `Api-Key` + `Api-Secret` headers. No OAuth, no scopes.
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/conventions/demio-conventions.yml): No idempotency key. No pagination. No request-id header. URI-path versioning at v1.
+- [Errors](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/errors/demio-problem-types.yml): `{"messages": ["..."]}` — human-readable strings, no stable codes, not RFC 9457.
+- [Rate limits](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/rate-limits/demio-rate-limits.yml): 180 req/min; 100 calls/day on trial, 5,000/day paying, reset 00:00 UTC, shared with Zapier. No 429 and no RateLimit-* headers documented.
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/lifecycle/demio-lifecycle.yml): v1 only. No versioning policy, no deprecation policy, no API changelog.
+- [Data model](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/data-model/demio-data-model.yml): Event → EventDate (Session) → Participant. Registrants are not addressable in their own right.
+- [Sandbox](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/sandbox/demio-sandbox.yml): A `sandbox` flag exists on ping, but no self-serve sandbox credentials and no test fixtures.
+- [Event surface](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/asyncapi/demio-events.yml): No first-party webhooks. Registration/join/no-show events are delivered through the Demio Zapier app only.
+- [Plans and pricing](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/plans/demio-plans-pricing.yml): API access is included in every plan; the plan only sets the daily call quota.
+
+## Client libraries
+
+- [Packages](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/packages/demio-packages.yml): One official SDK — `meetdemio/demio-php-sdk` on Packagist, version 1.0, published 2016-03-22, from Demio's own GitHub org. No JavaScript, Python, Ruby, Go, Java or C# client.
+
+## Agent surface
+
+- [Agent skills](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/skills/_index.yml): Packaged operating instructions for registering an attendee and for pulling a Session attendance report.
+- [MCP (candidate)](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/mcp/demio-mcp.yml): Demio publishes no MCP server. Third-party wrappers exist (Composio, Pipedream).
+- [Tool crosswalk](https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/mcp/demio-tool-crosswalk.yml)
+- Agent card: none. `/.well-known/agent-card.json` and `/.well-known/agent.json` 404 on every Demio host.
+
+## Documentation
+
+- [Public Demio API reference (Apiary)](https://publicdemioapi.docs.apiary.io)
+- [API Limitations](https://help.demio.com/en/articles/4544025-api-limitations)
+- [Retrieving participants from a Session using the API](https://help.demio.com/en/articles/13676999-how-can-i-retrieve-participants-from-a-session-in-demio-using-the-api)
+- [Demio Help Center](https://help.demio.com/en/) — also publishes its own [llms.txt](https://help.demio.com/llms.txt)
+- [Security & Privacy](https://help.demio.com/en/articles/5151423-demio-security-privacy)
+- [Status page](https://status.demio.com)
+
+## Company
+
+- [Demio](https://www.demio.com)
+- [Pricing](https://www.demio.com/pricing)
+- [Free trial](https://www.demio.com/free-trial)
+- [Blog](https://www.demio.com/blog)
+- [Integrations](https://www.demio.com/integrations)
+- [Banzai International (parent)](https://www.banzai.io)
+- [GitHub — meetdemio](https://github.com/meetdemio)
