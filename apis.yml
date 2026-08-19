@@ -22,7 +22,7 @@ x-tier: active
 x-tier-reason: public-rest-api-with-published-contract
 x-parent-company: 'Banzai International, Inc. (NASDAQ: BNZI)'
 x-related-repo: all/banzai
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
