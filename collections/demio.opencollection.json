@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Public Demio API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Intro",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ping via headers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.demio.com/api/v1/ping",
+            "auth": {
+              "type": "apikey",
+              "key": "Api-Key",
+              "value": "{{Api-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Verifies authorization using the `Api-Key` and `Api-Secret` request headers. Returns whether the credentials resolve and whether they are sandbox credentials."
+        },
+        {
+          "info": {
+            "name": "Ping via query string",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.demio.com/api/v1/ping/query",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Api Key"
+              },
+              {
+                "name": "api_secret",
+                "value": "",
+                "type": "query",
+                "description": "Api Secret"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Verifies authorization using the `api_key` and `api_secret` query string parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Events list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.demio.com/api/v1/events",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter events by type"
+              }
+            ]
+          },
+          "docs": "Returns active (not canceled) Events grouped by Event ID and ordered by scheduled date/time (next upcoming session). Use the `type` query parameter to filter to upcoming, past or automated Events."
+        },
+        {
+          "info": {
+            "name": "Event info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.demio.com/api/v1/event/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Event ID"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Return only active dates in series"
+              }
+            ]
+          },
+          "docs": "Returns information about a specific Event with the full list of Event Sessions (Dates), ordered by scheduled date/time."
+        },
+        {
+          "info": {
+            "name": "Event Session info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.demio.com/api/v1/event/:id/date/:date_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Event ID"
+              },
+              {
+                "name": "date_id",
+                "value": "",
+                "type": "path",
+                "description": "Event Date ID"
+              }
+            ]
+          },
+          "docs": "Returns information about a specific Event Session (Date)."
+        },
+        {
+          "info": {
+            "name": "Register",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://my.demio.com/api/v1/event/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers someone for an Event and returns the unique join link for that person. Request attributes are automatically filtered; registration form field data may be passed in the request body. Custom fields are keyed by the field's Unique Identifier as configured in the Event's Registration block."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Event Date participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://my.demio.com/api/v1/report/:date_id/participants",
+            "params": [
+              {
+                "name": "date_id",
+                "value": "",
+                "type": "path",
+                "description": "Event Date ID"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by participation status"
+              }
+            ]
+          },
+          "docs": "Returns the participant list for an Event Session (Date). Use the `status` query parameter to filter results by participation status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

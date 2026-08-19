@@ -1,0 +1,1156 @@
+{
+  "item": [
+    {
+      "id": "7ce5550f-383a-40d1-ad7c-6338f89f41d5",
+      "name": "Intro",
+      "description": {
+        "content": "Authorization checks.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fbb6d3f5-b6e5-4cef-b50a-b0992dc55948",
+          "name": "Ping via headers",
+          "request": {
+            "name": "Ping via headers",
+            "description": {
+              "content": "Verifies authorization using the `Api-Key` and `Api-Secret` request headers. Returns whether the credentials resolve and whether they are sandbox credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Api-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6e2634a8-2a5b-47b8-a288-14aada9ebd10",
+              "name": "Authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pong\": true,\n  \"sandbox\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1a1ab74-1c74-43e7-b15e-eaf62ade1463",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pong\": false,\n  \"messages\": [\n    \"Authorization failed\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d52aec63-3530-481e-a4e5-0606eef462f1",
+              "name": "Account is not active",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pong\": false,\n  \"messages\": [\n    \"Account is not active\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7d0af18-6afe-4d24-8d3c-ab42fee55076",
+          "name": "Ping via query string",
+          "request": {
+            "name": "Ping via query string",
+            "description": {
+              "content": "Verifies authorization using the `api_key` and `api_secret` query string parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Api Key"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_secret",
+                  "value": "<string>",
+                  "description": "(Required) Api Secret"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "60f869e4-dd57-4a8b-b707-51293aff2887",
+              "name": "Authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pong\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c83b8dd7-64a1-460b-b1c4-ef56e190060c",
+              "name": "Authorization failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pong\": true,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a369d04-3681-4dbc-a502-3c634f55bb0b",
+              "name": "Account is not active",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pong\": false,\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9ab6bc7f-e3f2-4b75-b8c9-52e67e7db225",
+      "name": "Events",
+      "description": {
+        "content": "Events, Event Sessions (Dates) and registration.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93779eb2-6ad5-445a-a6e4-6106f65c33a2",
+          "name": "Events list",
+          "request": {
+            "name": "Events list",
+            "description": {
+              "content": "Returns active (not canceled) Events grouped by Event ID and ordered by scheduled date/time (next upcoming session). Use the `type` query parameter to filter to upcoming, past or automated Events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter events by type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf76a548-7fea-4cb6-b142-7518d3cca928",
+              "name": "A list of Events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 62,\n    \"name\": \"First Webinar\",\n    \"description\": \"First Webinar description\",\n    \"date_id\": 1218,\n    \"status\": \"running\",\n    \"timestamp\": 1456723800,\n    \"zone\": \"Europe/Kiev\",\n    \"registration_url\": \"https://my.demio.com/ref/FKXeiDqyQsRYbfiv\",\n    \"automated\": {\n      \"ready\": true,\n      \"duration\": 3620\n    }\n  },\n  {\n    \"id\": 45,\n    \"name\": \"Second Webinar\",\n    \"description\": \"Second Webinar description\",\n    \"date_id\": 1196,\n    \"status\": \"scheduled\",\n    \"timestamp\": 1456765200,\n    \"zone\": \"America/New_York\",\n    \"registration_url\": \"https://my.demio.com/ref/pgRzWQhYLPmuboOA\",\n    \"automated\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df32a6c2-8111-4d42-bc81-4caac810620f",
+          "name": "Event info",
+          "request": {
+            "name": "Event info",
+            "description": {
+              "content": "Returns information about a specific Event with the full list of Event Sessions (Dates), ordered by scheduled date/time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "false",
+                  "description": "Return only active dates in series"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Event ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f941708f-4856-42c8-a646-1ae2987e0f09",
+              "name": "The Event",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Event ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3925.908530382166,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"registrants_stay_registered\": true,\n  \"registration_url\": \"string\",\n  \"next_date_id\": 9167.579521163867,\n  \"automated\": {\n    \"duration\": 5958.430559823097,\n    \"ready\": false\n  },\n  \"dates\": [\n    {\n      \"date_id\": 5389.592277394712,\n      \"status\": \"string\",\n      \"timestamp\": 9231.633373063458,\n      \"datetime\": \"string\",\n      \"zone\": \"string\"\n    },\n    {\n      \"date_id\": 3440.505228750672,\n      \"status\": \"string\",\n      \"timestamp\": 2616.874278764895,\n      \"datetime\": \"string\",\n      \"zone\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a54a5f2e-eec0-4ca2-bd42-15da777b625c",
+              "name": "Event not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "active",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Event ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"Event not found\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcb1e19d-d7bf-4b3c-89ba-dbd5ce642d7d",
+          "name": "Event Session info",
+          "request": {
+            "name": "Event Session info",
+            "description": {
+              "content": "Returns information about a specific Event Session (Date).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                ":id",
+                "date",
+                ":date_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Event ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "date_id",
+                  "description": "(Required) Event Date ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8468950f-2c9e-4931-a712-155bd1fda8e5",
+              "name": "The Event Session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":id",
+                    "date",
+                    ":date_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Event ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "date_id",
+                      "description": "(Required) Event Date ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date_id\": 1218,\n  \"status\": \"scheduled\",\n  \"timestamp\": 1456723800,\n  \"datetime\": \"March 26th, 2016 at 8:00PM EET\",\n  \"zone\": \"Europe/Kiev\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ded5e76d-10d2-4a52-bddc-7e2c95586b31",
+              "name": "Event Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    ":id",
+                    "date",
+                    ":date_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Event ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "date_id",
+                      "description": "(Required) Event Date ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"Event Date not found\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9c9c6d6-c7bb-4335-8f37-f227b1fdd007",
+          "name": "Register",
+          "request": {
+            "name": "Register",
+            "description": {
+              "content": "Registers someone for an Event and returns the unique join link for that person. Request attributes are automatically filtered; registration form field data may be passed in the request body. Custom fields are keyed by the field's Unique Identifier as configured in the Event's Registration block.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"id\": \"<number>\",\n  \"ref_url\": \"<string>\",\n  \"date_id\": \"<number>\",\n  \"last_name\": \"<string>\",\n  \"company\": \"<string>\",\n  \"website\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"gdpr\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5b1bef6c-95ef-4997-9c78-f987c801de4f",
+              "name": "Registered",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": 1,\n  \"ref_url\": null,\n  \"date_id\": 35,\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@gmail.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hash\": \"fPaSYijVHXI6ZJgE\",\n  \"join_link\": \"https://event.demio.com/join/fPaSYijVHXI6ZJgE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4db9ffe-6a97-4d6a-ae82-09083521e311",
+              "name": "Validation failed or malformed request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": 1,\n  \"ref_url\": null,\n  \"date_id\": 35,\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@gmail.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"Name must be more than 2 symbols\",\n    \"Wrong Email format\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "58770438-3385-41ab-82c3-5680bc4c6f9f",
+      "name": "Reports",
+      "description": {
+        "content": "Participation and attendance reporting.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4efbd19-ddcc-459a-b6eb-e0782f653020",
+          "name": "Event Date participants",
+          "request": {
+            "name": "Event Date participants",
+            "description": {
+              "content": "Returns the participant list for an Event Session (Date). Use the `status` query parameter to filter results by participation status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "report",
+                ":date_id",
+                "participants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by participation status"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "date_id",
+                  "description": "(Required) Event Date ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cd2d42c-e8a3-413e-a3be-c4e762a91614",
+              "name": "Participants for the Session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "report",
+                    ":date_id",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "date_id",
+                      "description": "(Required) Event Date ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"participants\": [\n    {\n      \"email\": \"john.doe@gmail.com\",\n      \"name\": \"John\",\n      \"custom_fields\": [\n        {\n          \"id\": \"last_name\",\n          \"name\": \"Last Name\",\n          \"value\": \"Doe\"\n        },\n        {\n          \"id\": \"website\",\n          \"name\": \"Website\",\n          \"value\": \"https://demio.com\"\n        }\n      ],\n      \"attended\": true,\n      \"status\": \"completed\"\n    },\n    {\n      \"email\": \"jane.doe@gmail.com\",\n      \"name\": \"Jane Doe\",\n      \"custom_fields\": [],\n      \"attended\": false,\n      \"status\": \"did not attend\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://my.demio.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b1b0447c-fb58-403f-a666-56a11b2ab762",
+    "name": "Public Demio API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST API for Demio, the webinar and virtual-event platform operated by Banzai International. The API exposes the Event, Event Session (Date), registration and participant-reporting surface: list and read Events, read a specific Event Session, register a person for an Event and receive their unique join link, and pull the participant/attendance report for a Session. Every request is authorized with an account API Key and API Secret, supplied either as `Api-Key` / `Api-Secret` request headers or as `api_key` / `api_secret` query string parameters. Keys are managed in the Demio Settings > API area.\n\nProvenance: this document is a faithful format conversion of the API Blueprint that Demio publishes at https://publicdemioapi.docs.apiary.io (blueprint source https://jsapi.apiary.io/apis/publicdemioapi.apib, Apiary owner \"Demio\"). No operation, parameter, response or field has been added that is not documented in that blueprint. Descriptions, rate limits and error semantics are drawn from the Demio Help Center. Live behaviour of `GET /ping` was re-verified on 2026-08-12 (HTTP 401 `{\"pong\":false,\"messages\":[\"Authorization failed\"]}` without credentials), and the blueprint fetched on 2026-08-12 is byte-identical to the copy harvested on 2026-08-06.\n\nContact Support:\n Name: Demio Support\n Email: support@demio.com",
+      "type": "text/plain"
+    }
+  }
+}
