@@ -36,6 +36,18 @@ tags:
 - Video
 - Engagement Marketing
 - Lead Generation
+- Software-as-a-Service
+tags_raw:
+- Company
+- Webinars
+- Virtual Events
+- Event Management
+- Marketing
+- Marketing Technology
+- Demand Generation
+- Video
+- Engagement Marketing
+- Lead Generation
 - SaaS
 - API
 apis:
@@ -47,6 +59,9 @@ apis:
   humanURL: https://publicdemioapi.docs.apiary.io
   baseURL: https://my.demio.com/api/v1
   tags:
+  - Event
+  - Registration
+  tags_raw:
   - Events
   - Registration
   properties:
