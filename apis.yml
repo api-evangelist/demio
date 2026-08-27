@@ -53,53 +53,14 @@ tags_raw:
 apis:
 - aid: demio:demio-events-api
   name: Demio Events API
-  description: >-
-    Events, Event Sessions (Dates) and attendee registration. List and read Events, read a
-    specific Session, and register a person for an Event to receive their unique join link.
+  description: Events, Event Sessions (Dates) and registration.
   humanURL: https://publicdemioapi.docs.apiary.io
   baseURL: https://my.demio.com/api/v1
   tags:
-  - Event
-  - Registration
-  tags_raw:
   - Events
-  - Registration
   properties:
   - type: OpenAPI
-    url: openapi/demio-openapi.yml
-  - type: APIBlueprint
-    url: openapi/demio-api-blueprint-original.apib
-  - type: Documentation
-    url: https://publicdemioapi.docs.apiary.io
-  - type: APIReference
-    url: https://publicdemioapi.docs.apiary.io
-  - type: Authentication
-    url: authentication/demio-authentication.yml
-  - type: RateLimits
-    url: rate-limits/demio-rate-limits.yml
-  - type: ErrorCatalog
-    url: errors/demio-problem-types.yml
-  - type: Conventions
-    url: conventions/demio-conventions.yml
-  - type: DataModel
-    url: data-model/demio-data-model.yml
-  - type: Overlay
-    url: overlays/demio-openapi-overlay.yaml
-  - type: LLMsTxt
-    url: llms/demio-llms.txt
-- aid: demio:demio-reports-api
-  name: Demio Reports API
-  description: >-
-    Per-Session participation and attendance reporting — the participant list for an Event
-    Session with attendance status and registration custom-field values.
-  humanURL: https://publicdemioapi.docs.apiary.io
-  baseURL: https://my.demio.com/api/v1
-  tags:
-  - Reports
-  - Analytics
-  properties:
-  - type: OpenAPI
-    url: openapi/demio-openapi.yml
+    url: openapi/demio-events-api-openapi.yml
   - type: APIBlueprint
     url: openapi/demio-api-blueprint-original.apib
   - type: Documentation
@@ -118,19 +79,18 @@ apis:
     url: data-model/demio-data-model.yml
   - type: LLMsTxt
     url: llms/demio-llms.txt
+  - type: Sandbox
+    url: sandbox/demio-sandbox.yml
 - aid: demio:demio-intro-api
   name: Demio Intro API
-  description: >-
-    Authorization verification. Confirms an account API key/secret pair is valid and
-    reports whether it is a sandbox credential.
+  description: Authorization checks.
   humanURL: https://publicdemioapi.docs.apiary.io
   baseURL: https://my.demio.com/api/v1
   tags:
   - Intro
-  - Authentication
   properties:
   - type: OpenAPI
-    url: openapi/demio-openapi.yml
+    url: openapi/demio-intro-api-openapi.yml
   - type: APIBlueprint
     url: openapi/demio-api-blueprint-original.apib
   - type: Documentation
@@ -139,10 +99,48 @@ apis:
     url: https://publicdemioapi.docs.apiary.io
   - type: Authentication
     url: authentication/demio-authentication.yml
-  - type: Sandbox
-    url: sandbox/demio-sandbox.yml
+  - type: RateLimits
+    url: rate-limits/demio-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/demio-problem-types.yml
+  - type: Conventions
+    url: conventions/demio-conventions.yml
+  - type: DataModel
+    url: data-model/demio-data-model.yml
   - type: LLMsTxt
     url: llms/demio-llms.txt
+  - type: Sandbox
+    url: sandbox/demio-sandbox.yml
+- aid: demio:demio-reports-api
+  name: Demio Reports API
+  description: Participation and attendance reporting.
+  humanURL: https://publicdemioapi.docs.apiary.io
+  baseURL: https://my.demio.com/api/v1
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/demio-reports-api-openapi.yml
+  - type: APIBlueprint
+    url: openapi/demio-api-blueprint-original.apib
+  - type: Documentation
+    url: https://publicdemioapi.docs.apiary.io
+  - type: APIReference
+    url: https://publicdemioapi.docs.apiary.io
+  - type: Authentication
+    url: authentication/demio-authentication.yml
+  - type: RateLimits
+    url: rate-limits/demio-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/demio-problem-types.yml
+  - type: Conventions
+    url: conventions/demio-conventions.yml
+  - type: DataModel
+    url: data-model/demio-data-model.yml
+  - type: LLMsTxt
+    url: llms/demio-llms.txt
+  - type: Sandbox
+    url: sandbox/demio-sandbox.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
