@@ -14,6 +14,18 @@ description: >-
   first-party PHP SDK from its meetdemio GitHub organization, and offers a Zapier app with
   registration, join, no-show and event-update triggers for teams that do not want to call
   the API directly.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/639df5c77a191c7268d2f9a2/63d939e13b301514d7b3dbab_60ee09e2a0845e4356fd7641_5a86d4765e69d200011f70a5_favicon-256.png
 url: https://raw.githubusercontent.com/api-evangelist/demio/refs/heads/main/apis.yml
 x-type: company
