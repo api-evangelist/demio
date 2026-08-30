@@ -69,6 +69,8 @@ apis:
   humanURL: https://publicdemioapi.docs.apiary.io
   baseURL: https://my.demio.com/api/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
