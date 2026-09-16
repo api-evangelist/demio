@@ -1,19 +1,16 @@
 aid: demio
 name: Demio
-description: >-
-  Demio is a browser-based webinar and virtual-event platform built for B2B marketing and
-  sales teams, operated by Banzai International, Inc. (NASDAQ: BNZI). It runs live,
-  automated/evergreen, on-demand and series webinars with no attendee download, and pairs
-  them with customizable registration pages, embeddable registration forms, in-session
-  engagement tools (polls, handouts, featured actions, chat), recordings, Showcase event
-  listings and post-webinar analytics. Its public developer surface is the Public Demio
-  API — a key/secret authorized REST API at https://my.demio.com/api/v1 covering Events,
-  Event Sessions (Dates), attendee registration with unique join links, and per-Session
-  participation reporting. Demio documents the API as an Apiary API Blueprint, publishes
-  burst rate limits and daily call quotas, runs a public Atlassian Statuspage, ships one
-  first-party PHP SDK from its meetdemio GitHub organization, and offers a Zapier app with
-  registration, join, no-show and event-update triggers for teams that do not want to call
-  the API directly.
+description: 'Demio is a browser-based webinar and virtual-event platform built for B2B marketing and
+  sales teams, operated by Banzai International, Inc. (NASDAQ: BNZI). It runs live, automated/evergreen,
+  on-demand and series webinars with no attendee download, and pairs them with customizable registration
+  pages, embeddable registration forms, in-session engagement tools (polls, handouts, featured actions,
+  chat), recordings, Showcase event listings and post-webinar analytics. Its public developer surface
+  is the Public Demio API — a key/secret authorized REST API at https://my.demio.com/api/v1 covering Events,
+  Event Sessions (Dates), attendee registration with unique join links, and per-Session participation
+  reporting. Demio documents the API as an Apiary API Blueprint, publishes burst rate limits and daily
+  call quotas, runs a public Atlassian Statuspage, ships one first-party PHP SDK from its meetdemio GitHub
+  organization, and offers a Zapier app with registration, join, no-show and event-update triggers for
+  teams that do not want to call the API directly.'
 deliveryModel:
   model: saas
   open_source: false
@@ -52,7 +49,7 @@ x-parent-company: 'Banzai International, Inc. (NASDAQ: BNZI)'
 x-related-repo: all/banzai
 specificationVersion: '0.23'
 created: '2026-08-12'
-modified: '2026-08-12'
+modified: '2026-09-16'
 tags:
 - Company
 - Webinars
@@ -214,7 +211,7 @@ common:
 - type: Integrations
   url: https://www.demio.com/integrations
 - type: OpenAPI
-  url: openapi/demio-openapi.yml
+  url: openapi/_original/demio-openapi.yml
 - type: APIBlueprint
   url: openapi/demio-api-blueprint-original.apib
 - type: Authentication
