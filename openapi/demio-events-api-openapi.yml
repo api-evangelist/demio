@@ -247,53 +247,6 @@ components:
           description: Humanized Event registration page URL
         automated:
           $ref: '#/components/schemas/Automated'
-    Automated:
-      type:
-      - object
-      - 'null'
-      description: Present when the Event is automated
-      properties:
-        duration:
-          type: number
-          description: Video duration in seconds
-        ready:
-          type: boolean
-          description: Video is ready to be played
-    Registration:
-      type: object
-      properties:
-        hash:
-          type: string
-          description: Unique Attendee hash used to join the webinar
-        join_link:
-          type: string
-          description: Link to join the webinar
-    EventDate:
-      type: object
-      properties:
-        date_id:
-          type: number
-          description: Event Date identifier
-        status:
-          type: string
-          description: Status
-        timestamp:
-          type: number
-          description: Unix timestamp
-        datetime:
-          type: string
-          description: Human friendly date/time string
-        zone:
-          type: string
-          description: Timezone
-    Error:
-      type: object
-      properties:
-        messages:
-          type: array
-          description: Human readable error messages
-          items:
-            type: string
     Event:
       type: object
       properties:
@@ -322,6 +275,14 @@ components:
           description: All (scheduled, running, finished) Event Dates
           items:
             $ref: '#/components/schemas/EventDate'
+    Error:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: Human readable error messages
+          items:
+            type: string
     RegistrationRequest:
       type: object
       required:
@@ -367,6 +328,45 @@ components:
         gdpr:
           type: string
           description: Value for the predefined GDPR field
+    Automated:
+      type:
+      - object
+      - 'null'
+      description: Present when the Event is automated
+      properties:
+        duration:
+          type: number
+          description: Video duration in seconds
+        ready:
+          type: boolean
+          description: Video is ready to be played
+    Registration:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Unique Attendee hash used to join the webinar
+        join_link:
+          type: string
+          description: Link to join the webinar
+    EventDate:
+      type: object
+      properties:
+        date_id:
+          type: number
+          description: Event Date identifier
+        status:
+          type: string
+          description: Status
+        timestamp:
+          type: number
+          description: Unix timestamp
+        datetime:
+          type: string
+          description: Human friendly date/time string
+        zone:
+          type: string
+          description: Timezone
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
