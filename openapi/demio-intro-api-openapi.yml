@@ -108,6 +108,15 @@ paths:
                 $ref: '#/components/schemas/PingError'
 components:
   schemas:
+    PingError:
+      type: object
+      properties:
+        pong:
+          type: boolean
+        messages:
+          type: array
+          items:
+            type: string
     Pong:
       type: object
       required:
@@ -119,15 +128,6 @@ components:
         sandbox:
           type: boolean
           description: True when sandbox key/secret were used
-    PingError:
-      type: object
-      properties:
-        pong:
-          type: boolean
-        messages:
-          type: array
-          items:
-            type: string
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

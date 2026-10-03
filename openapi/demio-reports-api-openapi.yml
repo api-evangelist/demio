@@ -75,6 +75,13 @@ paths:
                   status: did not attend
 components:
   schemas:
+    ParticipantList:
+      type: object
+      properties:
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
     Participant:
       type: object
       properties:
@@ -111,13 +118,6 @@ components:
         value:
           type: string
           description: Field value
-    ParticipantList:
-      type: object
-      properties:
-        participants:
-          type: array
-          items:
-            $ref: '#/components/schemas/Participant'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
