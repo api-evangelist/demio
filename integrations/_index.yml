@@ -39,7 +39,7 @@
     app_slug: demio
     beta: false
     builder: unknown (not in the directory record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: demio-n8n
   label: n8n
@@ -64,5 +64,5 @@
     node_path: Demio
     trigger: false
     builder: n8n (built-in node)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
