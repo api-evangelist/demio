@@ -82,6 +82,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Participant'
+    ParticipantCustomField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Field identifier
+        name:
+          type: string
+          description: Field name
+        value:
+          type: string
+          description: Field value
     Participant:
       type: object
       properties:
@@ -106,18 +118,6 @@ components:
           - did not attend
           - left early
           - banned
-    ParticipantCustomField:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Field identifier
-        name:
-          type: string
-          description: Field name
-        value:
-          type: string
-          description: Field value
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

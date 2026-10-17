@@ -210,6 +210,100 @@ paths:
                     - Bad Request syntax. Try to check request Body data JSON format.
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        messages:
+          type: array
+          description: Human readable error messages
+          items:
+            type: string
+    Event:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Event ID
+        name:
+          type: string
+          description: Event name
+        description:
+          type: string
+          description: Event description
+        registrants_stay_registered:
+          type: boolean
+          description: Keep Registrants registered through the series
+        registration_url:
+          type: string
+          description: Humanized Event registration page URL
+        next_date_id:
+          type: number
+          description: Next available (running or scheduled) Event Date ID
+        automated:
+          $ref: '#/components/schemas/Automated'
+        dates:
+          type: array
+          description: All (scheduled, running, finished) Event Dates
+          items:
+            $ref: '#/components/schemas/EventDate'
+    Automated:
+      type:
+      - object
+      - 'null'
+      description: Present when the Event is automated
+      properties:
+        duration:
+          type: number
+          description: Video duration in seconds
+        ready:
+          type: boolean
+          description: Video is ready to be played
+    Registration:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Unique Attendee hash used to join the webinar
+        join_link:
+          type: string
+          description: Link to join the webinar
+    EventSummary:
+      type: object
+      required:
+      - id
+      - name
+      - date_id
+      - status
+      - timestamp
+      - zone
+      - registration_url
+      properties:
+        id:
+          type: number
+          description: Event ID
+        name:
+          type: string
+          description: Event name
+        description:
+          type: string
+          description: Event description
+        date_id:
+          type: number
+          description: Event Date ID
+        status:
+          type: string
+          description: Event Date status
+        timestamp:
+          type: number
+          description: Scheduled date/time of the Event Date, Unix timestamp
+        zone:
+          type: string
+          description: Scheduled timezone of the Event Date
+        registration_url:
+          type: string
+          description: Humanized Event registration page URL
+        automated:
+          $ref: '#/components/schemas/Automated'
     RegistrationRequest:
       type: object
       required:
@@ -255,60 +349,6 @@ components:
         gdpr:
           type: string
           description: Value for the predefined GDPR field
-    Registration:
-      type: object
-      properties:
-        hash:
-          type: string
-          description: Unique Attendee hash used to join the webinar
-        join_link:
-          type: string
-          description: Link to join the webinar
-    Error:
-      type: object
-      properties:
-        messages:
-          type: array
-          description: Human readable error messages
-          items:
-            type: string
-    EventSummary:
-      type: object
-      required:
-      - id
-      - name
-      - date_id
-      - status
-      - timestamp
-      - zone
-      - registration_url
-      properties:
-        id:
-          type: number
-          description: Event ID
-        name:
-          type: string
-          description: Event name
-        description:
-          type: string
-          description: Event description
-        date_id:
-          type: number
-          description: Event Date ID
-        status:
-          type: string
-          description: Event Date status
-        timestamp:
-          type: number
-          description: Scheduled date/time of the Event Date, Unix timestamp
-        zone:
-          type: string
-          description: Scheduled timezone of the Event Date
-        registration_url:
-          type: string
-          description: Humanized Event registration page URL
-        automated:
-          $ref: '#/components/schemas/Automated'
     EventDate:
       type: object
       properties:
@@ -327,46 +367,6 @@ components:
         zone:
           type: string
           description: Timezone
-    Automated:
-      type:
-      - object
-      - 'null'
-      description: Present when the Event is automated
-      properties:
-        duration:
-          type: number
-          description: Video duration in seconds
-        ready:
-          type: boolean
-          description: Video is ready to be played
-    Event:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Event ID
-        name:
-          type: string
-          description: Event name
-        description:
-          type: string
-          description: Event description
-        registrants_stay_registered:
-          type: boolean
-          description: Keep Registrants registered through the series
-        registration_url:
-          type: string
-          description: Humanized Event registration page URL
-        next_date_id:
-          type: number
-          description: Next available (running or scheduled) Event Date ID
-        automated:
-          $ref: '#/components/schemas/Automated'
-        dates:
-          type: array
-          description: All (scheduled, running, finished) Event Dates
-          items:
-            $ref: '#/components/schemas/EventDate'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
