@@ -16,6 +16,37 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: demio-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/demio-code-rules
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: demio-code-rules
+      version: 0.3.2
+      released: '2022-04-28'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/demio-code-rules
+      repo_leg: github-org:meetdemio
+      publisher_leg: email:demio.com
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
 - slug: demio-zapier
   label: Zapier
   partner: zapier
@@ -48,7 +79,7 @@
   type: marketplace
   marketplace: n8n-nodes-base
   channel: open-source-node
-  evidence: https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/Demio
+  evidence: https://github.com/n8n-io/n8n/tree/f73dc337f8dc61a4fd44aebe41c55faafe4f53a4/packages/nodes-base/nodes/Demio
   source: edge
   relationship: ipaas-bridge
   contract_reference:
@@ -64,36 +95,5 @@
     node_path: Demio
     trigger: false
     builder: n8n (built-in node)
-  status: not-a-workflow
-  arazzo: null
-- slug: demio-npm-registry
-  label: npm registry
-  partner: npm
-  partner_name: npm registry
-  category: official SDK (JavaScript/TypeScript)
-  type: register
-  channel: package-registry
-  evidence: https://www.npmjs.com/package/demio-code-rules
-  source: edge
-  relationship: distribution-channel
-  contract_reference:
-    register: npm registry (public registry JSON)
-    spec_file: null
-    language: JavaScript/TypeScript
-    packages:
-    - name: demio-code-rules
-      version: 0.3.2
-      released: '2022-04-28'
-      released_field: modified
-      lapsed: true
-      page: https://www.npmjs.com/package/demio-code-rules
-      repo_leg: github-org:meetdemio
-      publisher_leg: email:demio.com
-      matched_by: domain
-    current: false
-    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
-      24 months'
-    detected_by: sweep-official-sdks.py
-    detected: '2026-10-18'
   status: not-a-workflow
   arazzo: null
